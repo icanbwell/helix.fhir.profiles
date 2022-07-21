@@ -1,0 +1,753 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "pr-schedule",
+  "meta": {
+    "source": "https://www.icanbwell.com/fhir_profile_definitions",
+    "security": [
+      {
+        "system": "https://www.icanbwell.com/owner",
+        "code": "bwell"
+      },
+      {
+        "system": "https://www.icanbwell.com/access",
+        "code": "bwell"
+      }
+    ]
+  },
+  "url": "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-schedule",
+  "version": "1.02",
+  "name": "Schedule",
+  "title": "Profile: Schedule",
+  "status": "active",
+  "experimental": false,
+  "date": "2022-06-02",
+  "publisher": "bWell Connected Health",
+  "description": "Schedule resource for provider search & online booking",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "US",
+          "display": "United States of America"
+        }
+      ],
+      "text": "United States of America"
+    }
+  ],
+  "keyword": [
+    {
+      "system": "https://www.icanbwell.com/file-category-code",
+      "code": "provider-roster"
+    }
+  ],
+  "fhirVersion": "4.0.0",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Schedule",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Schedule",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Schedule",
+        "path": "Schedule"
+      },
+      {
+        "id": "Schedule.id",
+        "path": "Schedule.id"
+      },
+      {
+        "id": "Schedule.meta",
+        "path": "Schedule.meta",
+        "label": "meta",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Meta"
+          }
+        ]
+      },
+      {
+        "id": "Schedule.meta.source",
+        "path": "Schedule.meta.source",
+        "sliceName": "meta-source",
+        "label": "meta",
+        "short": "uri of the data source",
+        "definition": "Typically the data owner's URL followed by a source/file description",
+        "requirements": "mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of meta.source",
+            "valueUri": "https://www.icanbwell.com/provider-directory"
+          }
+        ]
+      },
+      {
+        "id": "Schedule.meta.security",
+        "path": "Schedule.meta.security",
+        "sliceName": "meta-security",
+        "label": "meta",
+        "short": "security tags representing the data's owner, vendor, and accessibility",
+        "definition": "data owner: \n \n data vendor: \n \n data access: ",
+        "requirements": "/owner & /access are mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of data owner security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/owner",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data access security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/access",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data vendor security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/vendor",
+              "code": "bwell"
+            }
+          }
+        ]
+      },
+      {
+        "id": "de-extension-any",
+        "path": "Schedule.extension",
+        "label": "extension-any",
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ]
+      },
+      {
+        "id": "de-extension-any.id",
+        "path": "Schedule.extension.id",
+        "label": "extension-any",
+        "short": "defined case-by-case, but is frequently the extension url",
+        "min": 1
+      },
+      {
+        "id": "de-extension-any.extension",
+        "path": "Schedule.extension.extension",
+        "label": "extension-any",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "de-extension-any.url",
+        "path": "Schedule.extension.url",
+        "label": "extension-any",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "de-extension-any.value[x]",
+        "path": "Schedule.extension.value[x]",
+        "label": "extension-any",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "extension-provider-search",
+        "path": "Schedule.extension",
+        "sliceName": "provider-search",
+        "label": "provider-search",
+        "short": "extension container for provider search characteristics per system",
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ]
+      },
+      {
+        "id": "extension-provider-search.id",
+        "path": "Schedule.extension.id",
+        "label": "provider-search",
+        "short": "providersearch",
+        "min": 1,
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "extension-provider-search.extension-search-system",
+        "path": "Schedule.extension.extension",
+        "sliceName": "search-system",
+        "label": "provider-search-search-system",
+        "short": "extension(s) to indicate the provider search system",
+        "requirements": "Indicate the provider search system URI, in case the provider instance belongs to feeds more than one search system",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ]
+      },
+      {
+        "id": "extension-provider-search.extension-search-system.id",
+        "path": "Schedule.extension.extension.id",
+        "label": "provider-search-search-system",
+        "short": "forsystem",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "extension-provider-search.extension-search-system.url",
+        "path": "Schedule.extension.extension.url",
+        "label": "provider-search-search-system",
+        "short": "fixed value: forSystem",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "fixedUri": "forSystem"
+      },
+      {
+        "id": "extension-provider-search.extension-search-system.valueUri",
+        "path": "Schedule.extension.extension.valueUri",
+        "label": "provider-search-search-system",
+        "short": "uri / url of the search system",
+        "requirements": "Although the context of this already implies it's for the Helix Provider Search Service, this field was included in the definition to specify which front end version of PSS. This would accommodate clients in the event they have more than one portal with us.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ]
+      },
+      {
+        "id": "extension-provider-search.extension-searchable",
+        "path": "Schedule.extension.extension",
+        "sliceName": "searchable",
+        "label": "provider-search-searchable",
+        "short": "extension(s) for a coded characteristic",
+        "definition": "a list of characteristics to describe the behavior and/or visibility of the record. Examples: online bookable; provider searchable",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ]
+      },
+      {
+        "id": "extension-provider-search.extension-searchable.id",
+        "path": "Schedule.extension.extension.id",
+        "label": "provider-search-searchable",
+        "short": "searchable",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "extension-provider-search.extension-searchable.url",
+        "path": "Schedule.extension.extension.url",
+        "label": "provider-search-searchable",
+        "short": "fixed value: searchCharacteristic",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "fixedUri": "searchCharacteristic"
+      },
+      {
+        "id": "extension-provider-search.extension-searchable.valueCodeableConcept",
+        "path": "Schedule.extension.extension.valueCodeableConcept",
+        "label": "provider-search-searchable",
+        "short": "searchable | hide-from-search",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "extension-provider-search.extension-bookable",
+        "path": "Schedule.extension.extension",
+        "sliceName": "bookable",
+        "label": "provider-search-bookable",
+        "short": "extension(s) for coded bookablity characteristics",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ]
+      },
+      {
+        "id": "extension-provider-search.extension-bookable.id",
+        "path": "Schedule.extension.extension.id",
+        "label": "provider-search-bookable",
+        "short": "bookable",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "extension-provider-search.extension-bookable.url",
+        "path": "Schedule.extension.extension.url",
+        "label": "provider-search-bookable",
+        "short": "fixed value: bookable",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "fixedUri": "bookable"
+      },
+      {
+        "id": "extension-provider-search.extension-bookable.valueCodeableConcept",
+        "path": "Schedule.extension.extension.valueCodeableConcept",
+        "label": "provider-search-bookable",
+        "short": "bookable-phone | bookable-online",
+        "requirements": "through the Coding object, multiple codes can be assigned",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "example": [
+          {
+            "label": "provider is online bookable and has 'call to book' option",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "id": "bookable-phone",
+                  "system": "https://raw.githubusercontent.com/imranq2/SparkAutoMapper.FHIR/main/ValueSet/search_characteristic",
+                  "code": "bookable-phone"
+                },
+                {
+                  "id": "bookable-online",
+                  "system": "https://raw.githubusercontent.com/imranq2/SparkAutoMapper.FHIR/main/ValueSet/search_characteristic",
+                  "code": "bookable-online"
+                }
+              ]
+            }
+          },
+          {
+            "label": "epic open scheduling",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "id": "bookable-phone",
+                  "system": "https://raw.githubusercontent.com/imranq2/SparkAutoMapper.FHIR/main/ValueSet/search_characteristic",
+                  "code": "bookable-phone"
+                },
+                {
+                  "id": "bookable-online",
+                  "system": "https://raw.githubusercontent.com/imranq2/SparkAutoMapper.FHIR/main/ValueSet/search_characteristic",
+                  "code": "bookable-online"
+                },
+                {
+                  "id": "epic-scheduling",
+                  "system": "https://healthcaresystem.org/epic/scheduling_type",
+                  "code": "open"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "extension-provider-search.url",
+        "path": "Schedule.extension.url",
+        "label": "provider-search",
+        "short": "fixed value: https://raw.githubusercontent.com/imranq2/SparkAutoMapper.FHIR/main/StructureDefinition/provider_search",
+        "min": 1,
+        "max": "1",
+        "fixedUri": "https://raw.githubusercontent.com/imranq2/SparkAutoMapper.FHIR/main/StructureDefinition/provider_search"
+      },
+      {
+        "id": "extension-provider-search.value[x]",
+        "path": "Schedule.extension.value[x]",
+        "max": "0"
+      },
+      {
+        "id": "de-identifier",
+        "path": "Schedule.identifier",
+        "label": "identifier",
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "short": "a value to identify the resource by",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ]
+      },
+      {
+        "id": "identifier.id",
+        "path": "Schedule.identifier.id",
+        "label": "identifier",
+        "short": "set case-by-case",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "identifier.use",
+        "path": "Schedule.identifier.use",
+        "label": "identifier",
+        "short": "usual | official | temp | secondary | old (If known)",
+        "definition": "The purpose of this identifier.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ]
+      },
+      {
+        "id": "identifier.type",
+        "path": "Schedule.identifier.type",
+        "label": "identifier",
+        "short": "Description of identifier",
+        "definition": "A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.",
+        "requirements": "Needs binding valueset",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "identifier.system",
+        "path": "Schedule.identifier.system",
+        "label": "identifier",
+        "short": "The system which created the identifier",
+        "definition": "Values may be an oid, uri, url, or canonical",
+        "comment": "for mapped data, this is frequently a canonical url",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "a client's unknown system",
+            "valueUri": "https://www.health.org/person-identifier"
+          }
+        ]
+      },
+      {
+        "id": "identifier.value",
+        "path": "Schedule.identifier.value",
+        "label": "identifier",
+        "short": "The unique value",
+        "definition": "The raw identifier value that represents a resource",
+        "requirements": "This should be the raw value, as it exists in the source data (ie without prefix)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "de-npi",
+        "path": "Schedule.identifier",
+        "sliceName": "npi",
+        "label": "npi",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "NPI of a practitioner or organization",
+        "definition": "national provider identifier as defined by nppes",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "patternIdentifier": {
+          "id": "npi",
+          "use": "official",
+          "type": {
+            "coding": [
+              {
+                "id": "type-npi",
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "NPI"
+              }
+            ]
+          },
+          "system": "http://hl7.org/fhir/sid/us-npi"
+        }
+      },
+      {
+        "id": "de-identifier-facility-id",
+        "path": "Schedule.identifier",
+        "sliceName": "facility-id",
+        "label": "facility-id",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "external source id for the location",
+        "definition": "raw value used by the data source to identify the record",
+        "requirements": "system = source URI",
+        "alias": [
+          "location identifier",
+          "practice identifier"
+        ],
+        "min": 1,
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "patternIdentifier": {
+          "id": "facility-id",
+          "type": {
+            "coding": [
+              {
+                "id": "facility-id",
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "FI"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "de-provider-id",
+        "path": "Schedule.identifier",
+        "sliceName": "provider-id",
+        "label": "provider-id",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "external source id for the practitioner",
+        "definition": "raw value used by the data source to identify the practitioner",
+        "requirements": "system = source URI",
+        "alias": [
+          "practitioner identifier",
+          "ehr identifier",
+          "prn"
+        ],
+        "min": 0,
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "patternIdentifier": {
+          "id": "provider-id",
+          "type": {
+            "coding": [
+              {
+                "id": "provider-id",
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "PRN"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "Schedule.active",
+        "path": "Schedule.active",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          },
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "short": "active flag",
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Schedule.serviceType",
+        "path": "Schedule.serviceType",
+        "label": "visit-type",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          },
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "short": "the type of visit (appointment)",
+        "definition": "includes scheduling appointment types, triage groups and protocols",
+        "requirements": "Needs Review for integrated scheduling requirements",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Schedule.actor",
+        "path": "Schedule.actor",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          },
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "slicing": {
+          "description": "slice by type",
+          "rules": "open"
+        },
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-healthcare-service",
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-practitioner-role"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Schedule.actor-facility",
+        "path": "Schedule.actor",
+        "sliceName": "actor-facility",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          },
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "short": "The healthcare facility the schedule pertains to",
+        "definition": "Use in instances where the schedule applies to the facility as a whole (and not any specific practitioner)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-healthcare-service"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Schedule.actor-practitioner",
+        "path": "Schedule.actor",
+        "sliceName": "actor-practitioner",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          },
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "short": "The practitioner the schedule pertains to",
+        "definition": "Use in instances where the schedule applies to a specific practitioner (at a specific healthcare location)",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-practitioner-role"
+            ]
+          }
+        ],
+        "mustSupport": true
+      }
+    ]
+  }
+}

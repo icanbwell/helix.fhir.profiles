@@ -1,0 +1,221 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "pr-insurance-company",
+  "meta": {
+    "source": "https://www.icanbwell.com/fhir_profile_definitions",
+    "security": [
+      {
+        "system": "https://www.icanbwell.com/owner",
+        "code": "bwell"
+      },
+      {
+        "system": "https://www.icanbwell.com/access",
+        "code": "bwell"
+      }
+    ]
+  },
+  "url": "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-insurance-company",
+  "version": "1.02",
+  "name": "InsuranceCompany",
+  "title": "Profile: Insurance Company",
+  "status": "active",
+  "experimental": false,
+  "date": "2022-06-02",
+  "publisher": "bWell Connected Health",
+  "description": "Insurance organizations (ACOs, TPAs, payors, etc)",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "US",
+          "display": "United States of America"
+        }
+      ],
+      "text": "United States of America"
+    }
+  ],
+  "keyword": [
+    {
+      "system": "https://www.icanbwell.com/file-category-code",
+      "code": "med-claims"
+    },
+    {
+      "system": "https://www.icanbwell.com/file-category-code",
+      "code": "rx-claims"
+    },
+    {
+      "system": "https://www.icanbwell.com/file-category-code",
+      "code": "eligibility"
+    }
+  ],
+  "fhirVersion": "4.0.0",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Organization",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Organization",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Organization",
+        "path": "Organization"
+      },
+      {
+        "id": "Organization.id",
+        "path": "Organization.id"
+      },
+      {
+        "id": "Organization.meta",
+        "path": "Organization.meta",
+        "label": "meta",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Meta"
+          }
+        ]
+      },
+      {
+        "id": "Organization.meta.source",
+        "path": "Organization.meta.source",
+        "sliceName": "meta-source",
+        "label": "meta",
+        "short": "uri of the data source",
+        "definition": "Typically the data owner's URL followed by a source/file description",
+        "requirements": "mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of meta.source",
+            "valueUri": "https://www.icanbwell.com/provider-directory"
+          }
+        ]
+      },
+      {
+        "id": "Organization.meta.security",
+        "path": "Organization.meta.security",
+        "sliceName": "meta-security",
+        "label": "meta",
+        "short": "security tags representing the data's owner, vendor, and accessibility",
+        "definition": "data owner: \n \n data vendor: \n \n data access: ",
+        "requirements": "/owner & /access are mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of data owner security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/owner",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data access security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/access",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data vendor security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/vendor",
+              "code": "bwell"
+            }
+          }
+        ]
+      },
+      {
+        "id": "Organization.active",
+        "path": "Organization.active",
+        "short": "default to true",
+        "mustSupport": true
+      },
+      {
+        "id": "de-organization-type",
+        "path": "Organization.type",
+        "label": "organization-type",
+        "slicing": {
+          "description": "slice by type",
+          "rules": "open"
+        },
+        "short": "Type of organization",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-organization-type.type.id",
+        "path": "Organization.type.id",
+        "label": "organization-type",
+        "short": "set to type code",
+        "requirements": "Needs Review",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "de-organization-type.type.coding",
+        "path": "Organization.type.coding",
+        "label": "organization-type",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ]
+      },
+      {
+        "id": "de-insurance-type",
+        "path": "Organization.type",
+        "sliceName": "insurance-type",
+        "label": "insurance-type",
+        "short": "fixed: ins",
+        "definition": "An insurance organization",
+        "min": 1,
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/organization-type",
+              "code": "ins"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Organization.name",
+        "path": "Organization.name",
+        "short": "Name of the company",
+        "mustSupport": true
+      }
+    ]
+  }
+}

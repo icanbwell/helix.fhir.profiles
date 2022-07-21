@@ -1,0 +1,374 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "pr-practitioner-network-affiliation",
+  "meta": {
+    "source": "https://www.icanbwell.com/fhir_profile_definitions",
+    "security": [
+      {
+        "system": "https://www.icanbwell.com/owner",
+        "code": "bwell"
+      },
+      {
+        "system": "https://www.icanbwell.com/access",
+        "code": "bwell"
+      }
+    ]
+  },
+  "url": "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-practitioner-network-affiliation",
+  "version": "1.02",
+  "name": "PractitionerRole",
+  "title": "Profile: Practitioner Network Affiliation",
+  "status": "active",
+  "experimental": false,
+  "date": "2022-06-02",
+  "publisher": "bWell Connected Health",
+  "description": "PractitionerRole to represent a practitioner's association to a healthcare network",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "US",
+          "display": "United States of America"
+        }
+      ],
+      "text": "United States of America"
+    }
+  ],
+  "keyword": [
+    {
+      "system": "https://www.icanbwell.com/file-category-code",
+      "code": "provider-roster"
+    }
+  ],
+  "fhirVersion": "4.0.0",
+  "kind": "resource",
+  "abstract": false,
+  "type": "PractitionerRole",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/PractitionerRole",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "PractitionerRole",
+        "path": "PractitionerRole"
+      },
+      {
+        "id": "PractitionerRole.id",
+        "path": "PractitionerRole.id"
+      },
+      {
+        "id": "PractitionerRole.meta",
+        "path": "PractitionerRole.meta",
+        "label": "meta",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Meta"
+          }
+        ]
+      },
+      {
+        "id": "PractitionerRole.meta.source",
+        "path": "PractitionerRole.meta.source",
+        "sliceName": "meta-source",
+        "label": "meta",
+        "short": "uri of the data source",
+        "definition": "Typically the data owner's URL followed by a source/file description",
+        "requirements": "mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of meta.source",
+            "valueUri": "https://www.icanbwell.com/provider-directory"
+          }
+        ]
+      },
+      {
+        "id": "PractitionerRole.meta.security",
+        "path": "PractitionerRole.meta.security",
+        "sliceName": "meta-security",
+        "label": "meta",
+        "short": "security tags representing the data's owner, vendor, and accessibility",
+        "definition": "data owner: \n \n data vendor: \n \n data access: ",
+        "requirements": "/owner & /access are mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of data owner security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/owner",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data access security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/access",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data vendor security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/vendor",
+              "code": "bwell"
+            }
+          }
+        ]
+      },
+      {
+        "id": "de-extension-any",
+        "path": "PractitionerRole.extension",
+        "label": "extension-any",
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ]
+      },
+      {
+        "id": "de-extension-any.id",
+        "path": "PractitionerRole.extension.id",
+        "label": "extension-any",
+        "short": "defined case-by-case, but is frequently the extension url",
+        "min": 1
+      },
+      {
+        "id": "de-extension-any.extension",
+        "path": "PractitionerRole.extension.extension",
+        "label": "extension-any",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "de-extension-any.url",
+        "path": "PractitionerRole.extension.url",
+        "label": "extension-any",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "de-extension-any.value[x]",
+        "path": "PractitionerRole.extension.value[x]",
+        "label": "extension-any",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "extension-reference-network",
+        "path": "PractitionerRole.extension",
+        "sliceName": "reference-network",
+        "label": "reference-network",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ]
+      },
+      {
+        "id": "extension-reference-network.id",
+        "path": "PractitionerRole.extension.id",
+        "label": "reference-network",
+        "short": "referenced id",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "extension-reference-network.url",
+        "path": "PractitionerRole.extension.url",
+        "label": "reference-network",
+        "short": "fixed value: ",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ]
+      },
+      {
+        "id": "extension-reference-network.value[x]",
+        "path": "PractitionerRole.extension.value[x]",
+        "label": "reference-network",
+        "short": "client code",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-healthcare-network"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "de-identifier",
+        "path": "PractitionerRole.identifier",
+        "label": "identifier",
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "short": "a value to identify the resource by",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ]
+      },
+      {
+        "id": "identifier.id",
+        "path": "PractitionerRole.identifier.id",
+        "label": "identifier",
+        "short": "set case-by-case",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "identifier.use",
+        "path": "PractitionerRole.identifier.use",
+        "label": "identifier",
+        "short": "usual | official | temp | secondary | old (If known)",
+        "definition": "The purpose of this identifier.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ]
+      },
+      {
+        "id": "identifier.type",
+        "path": "PractitionerRole.identifier.type",
+        "label": "identifier",
+        "short": "Description of identifier",
+        "definition": "A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.",
+        "requirements": "Needs binding valueset",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "identifier.system",
+        "path": "PractitionerRole.identifier.system",
+        "label": "identifier",
+        "short": "The system which created the identifier",
+        "definition": "Values may be an oid, uri, url, or canonical",
+        "comment": "for mapped data, this is frequently a canonical url",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "a client's unknown system",
+            "valueUri": "https://www.health.org/person-identifier"
+          }
+        ]
+      },
+      {
+        "id": "identifier.value",
+        "path": "PractitionerRole.identifier.value",
+        "label": "identifier",
+        "short": "The unique value",
+        "definition": "The raw identifier value that represents a resource",
+        "requirements": "This should be the raw value, as it exists in the source data (ie without prefix)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "de-npi",
+        "path": "PractitionerRole.identifier",
+        "sliceName": "npi",
+        "label": "npi",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "NPI of a practitioner or organization",
+        "definition": "national provider identifier as defined by nppes",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "patternIdentifier": {
+          "id": "npi",
+          "use": "official",
+          "type": {
+            "coding": [
+              {
+                "id": "type-npi",
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "NPI"
+              }
+            ]
+          },
+          "system": "http://hl7.org/fhir/sid/us-npi"
+        }
+      },
+      {
+        "id": "PractitionerRole.practitioner",
+        "path": "PractitionerRole.practitioner",
+        "short": "Practitioner associated to the network",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-practitioner"
+            ]
+          }
+        ],
+        "mustSupport": true
+      }
+    ]
+  }
+}

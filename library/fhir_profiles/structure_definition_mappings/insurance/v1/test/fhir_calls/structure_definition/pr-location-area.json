@@ -1,0 +1,182 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "pr-location-area",
+  "meta": {
+    "source": "https://www.icanbwell.com/fhir_profile_definitions",
+    "security": [
+      {
+        "system": "https://www.icanbwell.com/owner",
+        "code": "bwell"
+      },
+      {
+        "system": "https://www.icanbwell.com/access",
+        "code": "bwell"
+      }
+    ]
+  },
+  "url": "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-location-area",
+  "version": "1.02",
+  "name": "LocationArea",
+  "title": "Profile: Location Area",
+  "status": "active",
+  "experimental": false,
+  "date": "2022-06-02",
+  "publisher": "bWell Connected Health",
+  "description": "Location object representing a physical area",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "US",
+          "display": "United States of America"
+        }
+      ],
+      "text": "United States of America"
+    }
+  ],
+  "fhirVersion": "4.0.0",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Location",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Location",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Location",
+        "path": "Location"
+      },
+      {
+        "id": "Location.id",
+        "path": "Location.id"
+      },
+      {
+        "id": "Location.meta",
+        "path": "Location.meta",
+        "label": "meta",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Meta"
+          }
+        ]
+      },
+      {
+        "id": "Location.meta.source",
+        "path": "Location.meta.source",
+        "sliceName": "meta-source",
+        "label": "meta",
+        "short": "uri of the data source",
+        "definition": "Typically the data owner's URL followed by a source/file description",
+        "requirements": "mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of meta.source",
+            "valueUri": "https://www.icanbwell.com/provider-directory"
+          }
+        ]
+      },
+      {
+        "id": "Location.meta.security",
+        "path": "Location.meta.security",
+        "sliceName": "meta-security",
+        "label": "meta",
+        "short": "security tags representing the data's owner, vendor, and accessibility",
+        "definition": "data owner: \n \n data vendor: \n \n data access: ",
+        "requirements": "/owner & /access are mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of data owner security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/owner",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data access security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/access",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data vendor security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/vendor",
+              "code": "bwell"
+            }
+          }
+        ]
+      },
+      {
+        "id": "de-address-coverage-area",
+        "path": "Location.address",
+        "sliceName": "coverage-area",
+        "label": "coverage-area",
+        "short": "An area where services are rendered",
+        "definition": "Represents a state or zip code where services are provided",
+        "requirements": "two-digit state value and/or a 5-digit zip code",
+        "type": [
+          {
+            "code": "Address"
+          }
+        ],
+        "patternAddress": {
+          "id": "coverage-area",
+          "type": "physical"
+        },
+        "example": [
+          {
+            "label": "a Texas zip code",
+            "valueAddress": {
+              "id": "tx-coverage-area",
+              "type": "physical",
+              "state": "TX",
+              "postalCode": "78704"
+            }
+          },
+          {
+            "label": "the state of Maryland",
+            "valueAddress": {
+              "id": "md-coverage-area",
+              "type": "physical",
+              "state": "MD"
+            }
+          }
+        ]
+      },
+      {
+        "id": "Location.physicalType",
+        "path": "Location.physicalType",
+        "short": "Fixed: area | http://terminology.hl7.org/CodeSystem/location-physical-type",
+        "definition": "Code indicating the Location resource describes an area",
+        "patternCodeableConcept": {
+          "id": "physical-type",
+          "coding": [
+            {
+              "id": "area",
+              "system": "http://terminology.hl7.org/CodeSystem/location-physical-type",
+              "code": "area"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

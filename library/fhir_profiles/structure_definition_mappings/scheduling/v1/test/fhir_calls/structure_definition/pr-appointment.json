@@ -1,0 +1,550 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "pr-appointment",
+  "meta": {
+    "source": "https://www.icanbwell.com/fhir_profile_definitions",
+    "security": [
+      {
+        "system": "https://www.icanbwell.com/owner",
+        "code": "bwell"
+      },
+      {
+        "system": "https://www.icanbwell.com/access",
+        "code": "bwell"
+      }
+    ]
+  },
+  "url": "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-appointment",
+  "version": "1.02",
+  "name": "Appointment",
+  "title": "Profile: Appointment",
+  "status": "active",
+  "experimental": false,
+  "date": "2022-06-02",
+  "publisher": "bWell Connected Health",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "US",
+          "display": "United States of America"
+        }
+      ],
+      "text": "United States of America"
+    }
+  ],
+  "fhirVersion": "4.0.0",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Appointment",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Appointment",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Appointment",
+        "path": "Appointment"
+      },
+      {
+        "id": "Appointment.id",
+        "path": "Appointment.id"
+      },
+      {
+        "id": "Appointment.meta",
+        "path": "Appointment.meta",
+        "label": "meta",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Meta"
+          }
+        ]
+      },
+      {
+        "id": "Appointment.meta.source",
+        "path": "Appointment.meta.source",
+        "sliceName": "meta-source",
+        "label": "meta",
+        "short": "uri of the data source",
+        "definition": "Typically the data owner's URL followed by a source/file description",
+        "requirements": "mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of meta.source",
+            "valueUri": "https://www.icanbwell.com/provider-directory"
+          }
+        ]
+      },
+      {
+        "id": "Appointment.meta.security",
+        "path": "Appointment.meta.security",
+        "sliceName": "meta-security",
+        "label": "meta",
+        "short": "security tags representing the data's owner, vendor, and accessibility",
+        "definition": "data owner: \n \n data vendor: \n \n data access: ",
+        "requirements": "/owner & /access are mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of data owner security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/owner",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data access security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/access",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data vendor security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/vendor",
+              "code": "bwell"
+            }
+          }
+        ]
+      },
+      {
+        "id": "de-identifier",
+        "path": "Appointment.identifier",
+        "label": "identifier",
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "short": "a value to identify the resource by",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ]
+      },
+      {
+        "id": "identifier.id",
+        "path": "Appointment.identifier.id",
+        "label": "identifier",
+        "short": "set case-by-case",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "identifier.use",
+        "path": "Appointment.identifier.use",
+        "label": "identifier",
+        "short": "usual | official | temp | secondary | old (If known)",
+        "definition": "The purpose of this identifier.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ]
+      },
+      {
+        "id": "identifier.type",
+        "path": "Appointment.identifier.type",
+        "label": "identifier",
+        "short": "Description of identifier",
+        "definition": "A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.",
+        "requirements": "Needs binding valueset",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "identifier.system",
+        "path": "Appointment.identifier.system",
+        "label": "identifier",
+        "short": "The system which created the identifier",
+        "definition": "Values may be an oid, uri, url, or canonical",
+        "comment": "for mapped data, this is frequently a canonical url",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "a client's unknown system",
+            "valueUri": "https://www.health.org/person-identifier"
+          }
+        ]
+      },
+      {
+        "id": "identifier.value",
+        "path": "Appointment.identifier.value",
+        "label": "identifier",
+        "short": "The unique value",
+        "definition": "The raw identifier value that represents a resource",
+        "requirements": "This should be the raw value, as it exists in the source data (ie without prefix)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "de-visit-number",
+        "path": "Appointment.identifier",
+        "sliceName": "visit-number",
+        "label": "visit-number",
+        "short": "Appointment identifier value with type as VN|http://terminology.hl7.org/CodeSystem/v2-0203",
+        "patternIdentifier": {
+          "type": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "VN"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "Appointment.status",
+        "path": "Appointment.status",
+        "label": "appointment-status",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "short": "Appointment status code",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.serviceType",
+        "path": "Appointment.serviceType",
+        "label": "service-type",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "short": "Appointment service type",
+        "comment": "some resources in the fhir server (that don't have a source value) have a custom serviceType code w/ system incorrectly set to http://terminology.hl7.org/CodeSystem/service-type",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "example": [
+          {
+            "label": "service type with incorrect system",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/service-type",
+                  "code": "p3ooKp"
+                }
+              ]
+            }
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.start",
+        "path": "Appointment.start",
+        "label": "start-time",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "short": "appointment start time; likely the same value as the corresponding Slot.start",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "instant"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.slot",
+        "path": "Appointment.slot",
+        "label": "appointment-slot",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "short": "corresponding Slot resource for the appointment",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-slot"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.created",
+        "path": "Appointment.created",
+        "label": "appointment-created-date",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "short": "when the appointment resource was created",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-participant",
+        "path": "Appointment.participant",
+        "label": "participant",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "slicing": {
+          "description": "slice by type",
+          "rules": "open"
+        },
+        "min": 1,
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-participant.id",
+        "path": "Appointment.participant.id",
+        "label": "participant",
+        "short": "set to type code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "de-participant.type",
+        "path": "Appointment.participant.type",
+        "label": "participant",
+        "mustSupport": true
+      },
+      {
+        "id": "de-participant.actor",
+        "path": "Appointment.participant.actor",
+        "label": "participant",
+        "short": "reference to participant's defining resource",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-patient",
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-healthcare-location",
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-healthcare-service",
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-practitioner",
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-practitioner-role"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-participant.status",
+        "path": "Appointment.participant.status",
+        "label": "participant",
+        "short": "accepted",
+        "mustSupport": true
+      },
+      {
+        "id": "de-participating-patient",
+        "path": "Appointment.participant",
+        "sliceName": "participating-patient",
+        "label": "participating-patient",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "short": "the patient / subject of the appointment",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ]
+      },
+      {
+        "id": "de-participating-patient.type",
+        "path": "Appointment.participant.type",
+        "label": "participating-patient",
+        "short": "Fixed: patient|https//hl7.org/fhir/ValueSet/encounter-participant-type",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://hl7.org/fhir/ValueSet/encounter-participant-type",
+              "code": "patient"
+            }
+          ]
+        }
+      },
+      {
+        "id": "de-participating-patient.actor",
+        "path": "Appointment.participant.actor",
+        "label": "participating-patient",
+        "short": "reference to the individual's Patient resource",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-patient"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "de-booker",
+        "path": "Appointment.participant",
+        "sliceName": "booker",
+        "label": "booker",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "short": "the individual who scheduled the appointment on behalf of the patient",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ]
+      },
+      {
+        "id": "de-booker.type",
+        "path": "Appointment.participant.type",
+        "label": "booker",
+        "short": "Fixed: booker|https//hl7.org/fhir/ValueSet/encounter-participant-type",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://hl7.org/fhir/ValueSet/encounter-participant-type",
+              "code": "booker"
+            }
+          ]
+        }
+      },
+      {
+        "id": "de-booker.actor",
+        "path": "Appointment.participant.actor",
+        "label": "booker",
+        "short": "reference to the individual's Patient or Person resource",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-patient",
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-person"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "de-participating-location",
+        "path": "Appointment.participant",
+        "sliceName": "participating-location",
+        "label": "participating-location",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "short": "reference the location of the appointment",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ]
+      },
+      {
+        "id": "de-participating-location.type",
+        "path": "Appointment.participant.type",
+        "label": "participating-location",
+        "short": "Fixed: facility|https//hl7.org/fhir/ValueSet/encounter-participant-type",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "system": "https://hl7.org/fhir/ValueSet/encounter-participant-type",
+              "code": "facility"
+            }
+          ]
+        }
+      },
+      {
+        "id": "de-participating-location.actor",
+        "path": "Appointment.participant.actor",
+        "label": "participating-location",
+        "short": "reference to the provider's Location resource",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-healthcare-location"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

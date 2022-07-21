@@ -1,0 +1,900 @@
+[
+  {
+    "resourceType": "StructureDefinition",
+    "id": "pr-explanation-of-benefit-pharmacy",
+    "meta": {
+      "source": "https://www.icanbwell.com/fhir_profile_definitions",
+      "security": [
+        {
+          "system": "https://www.icanbwell.com/owner",
+          "code": "bwell"
+        },
+        {
+          "system": "https://www.icanbwell.com/access",
+          "code": "bwell"
+        }
+      ]
+    },
+    "url": "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-explanation-of-benefit-pharmacy",
+    "version": "1.02",
+    "name": "ExplanationOfBenefitPharmacy",
+    "title": "Profile: Explanation Of Benefit - Pharmacy",
+    "status": "active",
+    "experimental": false,
+    "date": "2022-06-02",
+    "publisher": "bWell Connected Health",
+    "description": "EOB for Rx claims",
+    "jurisdiction": [
+      {
+        "coding": [
+          {
+            "system": "urn:iso:std:iso:3166",
+            "code": "US",
+            "display": "United States of America"
+          }
+        ],
+        "text": "United States of America"
+      }
+    ],
+    "keyword": [
+      {
+        "system": "https://www.icanbwell.com/file-category-code",
+        "code": "rx-claims"
+      }
+    ],
+    "fhirVersion": "4.0.0",
+    "kind": "resource",
+    "abstract": false,
+    "type": "ExplanationOfBenefit",
+    "baseDefinition": "http://hl7.org/fhir/StructureDefinition/ExplanationOfBenefit",
+    "derivation": "constraint",
+    "differential": {
+      "element": [
+        {
+          "id": "ExplanationOfBenefit",
+          "path": "ExplanationOfBenefit"
+        },
+        {
+          "id": "ExplanationOfBenefit.id",
+          "path": "ExplanationOfBenefit.id"
+        },
+        {
+          "id": "ExplanationOfBenefit.meta",
+          "path": "ExplanationOfBenefit.meta",
+          "label": "meta",
+          "min": 1,
+          "max": "1",
+          "type": [
+            {
+              "code": "Meta"
+            }
+          ]
+        },
+        {
+          "id": "ExplanationOfBenefit.meta.source",
+          "path": "ExplanationOfBenefit.meta.source",
+          "sliceName": "meta-source",
+          "label": "meta",
+          "short": "uri of the data source",
+          "definition": "Typically the data owner's URL followed by a source/file description",
+          "requirements": "mandatory for all resources in bWell's FHIR Server",
+          "min": 1,
+          "max": "1",
+          "type": [
+            {
+              "code": "uri"
+            }
+          ],
+          "example": [
+            {
+              "label": "example of meta.source",
+              "valueUri": "https://www.icanbwell.com/provider-directory"
+            }
+          ]
+        },
+        {
+          "id": "ExplanationOfBenefit.meta.security",
+          "path": "ExplanationOfBenefit.meta.security",
+          "sliceName": "meta-security",
+          "label": "meta",
+          "short": "security tags representing the data's owner, vendor, and accessibility",
+          "definition": "data owner: \n \n data vendor: \n \n data access: ",
+          "requirements": "/owner & /access are mandatory for all resources in bWell's FHIR Server",
+          "min": 1,
+          "max": "*",
+          "type": [
+            {
+              "code": "Coding"
+            }
+          ],
+          "example": [
+            {
+              "label": "example of data owner security tag",
+              "valueCoding": {
+                "system": "https://www.icanbwell.com/owner",
+                "code": "bwell"
+              }
+            },
+            {
+              "label": "example of data access security tag",
+              "valueCoding": {
+                "system": "https://www.icanbwell.com/access",
+                "code": "bwell"
+              }
+            },
+            {
+              "label": "example of data vendor security tag",
+              "valueCoding": {
+                "system": "https://www.icanbwell.com/vendor",
+                "code": "bwell"
+              }
+            }
+          ]
+        },
+        {
+          "id": "de-identifier",
+          "path": "ExplanationOfBenefit.identifier",
+          "label": "identifier",
+          "slicing": {
+            "description": "slice by types",
+            "rules": "open"
+          },
+          "short": "a value to identify the resource by",
+          "type": [
+            {
+              "code": "Identifier"
+            }
+          ]
+        },
+        {
+          "id": "identifier.id",
+          "path": "ExplanationOfBenefit.identifier.id",
+          "label": "identifier",
+          "short": "set case-by-case",
+          "min": 1,
+          "max": "1",
+          "type": [
+            {
+              "code": "string"
+            }
+          ]
+        },
+        {
+          "id": "identifier.use",
+          "path": "ExplanationOfBenefit.identifier.use",
+          "label": "identifier",
+          "short": "usual | official | temp | secondary | old (If known)",
+          "definition": "The purpose of this identifier.",
+          "min": 0,
+          "max": "1",
+          "type": [
+            {
+              "code": "code"
+            }
+          ]
+        },
+        {
+          "id": "identifier.type",
+          "path": "ExplanationOfBenefit.identifier.type",
+          "label": "identifier",
+          "short": "Description of identifier",
+          "definition": "A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.",
+          "requirements": "Needs binding valueset",
+          "min": 1,
+          "max": "1",
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ]
+        },
+        {
+          "id": "identifier.system",
+          "path": "ExplanationOfBenefit.identifier.system",
+          "label": "identifier",
+          "short": "The system which created the identifier",
+          "definition": "Values may be an oid, uri, url, or canonical",
+          "comment": "for mapped data, this is frequently a canonical url",
+          "min": 1,
+          "max": "1",
+          "type": [
+            {
+              "code": "uri"
+            }
+          ],
+          "example": [
+            {
+              "label": "a client's unknown system",
+              "valueUri": "https://www.health.org/person-identifier"
+            }
+          ]
+        },
+        {
+          "id": "identifier.value",
+          "path": "ExplanationOfBenefit.identifier.value",
+          "label": "identifier",
+          "short": "The unique value",
+          "definition": "The raw identifier value that represents a resource",
+          "requirements": "This should be the raw value, as it exists in the source data (ie without prefix)",
+          "min": 1,
+          "max": "1",
+          "type": [
+            {
+              "code": "string"
+            }
+          ]
+        },
+        {
+          "id": "de-claim-number",
+          "path": "ExplanationOfBenefit.identifier",
+          "sliceName": "claim-number",
+          "label": "claim-number",
+          "short": "An identifier to the insurance claim / EOB",
+          "type": [
+            {
+              "code": "Identifier"
+            }
+          ],
+          "patternIdentifier": {
+            "id": "claim-id",
+            "type": {
+              "coding": [
+                {
+                  "id": "claim-id-type",
+                  "code": "claimnumber"
+                }
+              ]
+            },
+            "system": "http://hl7.org/fhir/sid/us-mbi"
+          }
+        },
+        {
+          "id": "ExplanationOfBenefit.status",
+          "path": "ExplanationOfBenefit.status",
+          "short": "Claim status",
+          "comment": "default to active",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "ExplanationOfBenefit.type",
+          "path": "ExplanationOfBenefit.type",
+          "short": "Claim type",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "ExplanationOfBenefit.use",
+          "path": "ExplanationOfBenefit.use",
+          "short": "Fixed: 'claim'",
+          "min": 1,
+          "max": "1",
+          "fixedCode": "claim",
+          "mustSupport": true
+        },
+        {
+          "id": "ExplanationOfBenefit.patient",
+          "path": "ExplanationOfBenefit.patient",
+          "short": "Claim status",
+          "comment": "default to active",
+          "min": 1,
+          "max": "1",
+          "type": [
+            {
+              "code": "Reference",
+              "targetProfile": [
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-patient"
+              ]
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "ExplanationOfBenefit.created",
+          "path": "ExplanationOfBenefit.created",
+          "short": "Fill date",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "ExplanationOfBenefit.insurer",
+          "path": "ExplanationOfBenefit.insurer",
+          "short": "Insurance company covering benefits",
+          "min": 1,
+          "type": [
+            {
+              "code": "Reference",
+              "targetProfile": [
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-insurance-company"
+              ]
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "ExplanationOfBenefit.provider",
+          "path": "ExplanationOfBenefit.provider",
+          "label": "pharmacy",
+          "short": "Dispensing pharmacy",
+          "min": 1,
+          "max": "1",
+          "type": [
+            {
+              "code": "Reference",
+              "targetProfile": [
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-healthcare-organization"
+              ]
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "ExplanationOfBenefit.outcome",
+          "path": "ExplanationOfBenefit.outcome",
+          "short": "complete | partial",
+          "min": 1,
+          "max": "1",
+          "mustSupport": true
+        },
+        {
+          "id": "de-care-team",
+          "path": "ExplanationOfBenefit.careTeam",
+          "label": "care-team",
+          "slicing": {
+            "description": "slice by type",
+            "rules": "open"
+          },
+          "short": "Providers listed on the claim",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-care-team.id",
+          "path": "ExplanationOfBenefit.careTeam.id",
+          "label": "care-team",
+          "short": "set as role code",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-care-team.sequence",
+          "path": "ExplanationOfBenefit.careTeam.sequence",
+          "label": "care-team",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-care-team.provider",
+          "path": "ExplanationOfBenefit.careTeam.provider",
+          "label": "care-team",
+          "min": 1,
+          "type": [
+            {
+              "code": "Reference",
+              "targetProfile": [
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-practitioner",
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-healthcare-organization"
+              ]
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-care-team.responsible",
+          "path": "ExplanationOfBenefit.careTeam.responsible",
+          "label": "care-team",
+          "min": 1,
+          "type": [
+            {
+              "code": "boolean"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-care-team.role",
+          "path": "ExplanationOfBenefit.careTeam.role",
+          "label": "care-team",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-prescribing-practitioner",
+          "path": "ExplanationOfBenefit.careTeam",
+          "sliceName": "prescribing-practitioner",
+          "label": "prescribing-practitioner",
+          "short": "Practitioner who prescribed the product",
+          "min": 1
+        },
+        {
+          "id": "de-prescribing-practitioner.sequence",
+          "path": "ExplanationOfBenefit.careTeam.sequence",
+          "label": "prescribing-practitioner",
+          "short": "Fixed: 1",
+          "min": 1,
+          "fixedInteger": 1
+        },
+        {
+          "id": "de-prescribing-practitioner.responsible",
+          "path": "ExplanationOfBenefit.careTeam.responsible",
+          "label": "prescribing-practitioner",
+          "min": 1
+        },
+        {
+          "id": "de-prescribing-practitioner.role",
+          "path": "ExplanationOfBenefit.careTeam.role",
+          "label": "prescribing-practitioner",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "id": "role-code",
+                "system": "http://terminology.hl7.org/CodeSystem/claimcareteamrole",
+                "code": "Prescribing"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-prescribing-practitioner.provider",
+          "path": "ExplanationOfBenefit.careTeam.provider",
+          "label": "prescribing-practitioner",
+          "min": 1,
+          "type": [
+            {
+              "code": "Reference",
+              "targetProfile": [
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-practitioner"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "de-care-team-pharmacy",
+          "path": "ExplanationOfBenefit.careTeam",
+          "sliceName": "care-team-pharmacy",
+          "label": "care-team-pharmacy",
+          "short": "The pharmacy providing the prescription",
+          "min": 1
+        },
+        {
+          "id": "de-care-team-pharmacy.sequence",
+          "path": "ExplanationOfBenefit.careTeam.sequence",
+          "label": "care-team-pharmacy",
+          "short": "Fixed: 2",
+          "min": 1,
+          "fixedInteger": 2
+        },
+        {
+          "id": "de-care-team-pharmacy.responsible",
+          "path": "ExplanationOfBenefit.careTeam.responsible",
+          "label": "care-team-pharmacy",
+          "min": 1
+        },
+        {
+          "id": "de-care-team-pharmacy.role",
+          "path": "ExplanationOfBenefit.careTeam.role",
+          "label": "care-team-pharmacy",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "id": "role-code",
+                "system": "http://terminology.hl7.org/CodeSystem/claimcareteamrole",
+                "code": "Servicing"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-care-team-pharmacy.provider",
+          "path": "ExplanationOfBenefit.careTeam.provider",
+          "label": "care-team-pharmacy",
+          "min": 1,
+          "type": [
+            {
+              "code": "Reference",
+              "targetProfile": [
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-healthcare-organization"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "de-supporting-info",
+          "path": "ExplanationOfBenefit.supportingInfo",
+          "label": "supporting-info",
+          "slicing": {
+            "description": "slice by type",
+            "rules": "open"
+          },
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-supporting-info.id",
+          "path": "ExplanationOfBenefit.supportingInfo.id",
+          "label": "supporting-info",
+          "short": "set to category code",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-supporting-info.sequence",
+          "path": "ExplanationOfBenefit.supportingInfo.sequence",
+          "label": "supporting-info",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-supporting-info.category",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "supporting-info",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-supporting-info.value[x]",
+          "path": "ExplanationOfBenefit.supportingInfo.value[x]",
+          "label": "supporting-info",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-days-supply",
+          "path": "ExplanationOfBenefit.supportingInfo",
+          "sliceName": "days-supply",
+          "label": "days-supply",
+          "short": "quantity of supply",
+          "min": 0,
+          "max": "1",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ]
+        },
+        {
+          "id": "de-days-supply.category",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "days-supply",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "code": "dayssupply"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-days-supply.valueQuantity",
+          "path": "ExplanationOfBenefit.supportingInfo.valueQuantity",
+          "label": "days-supply",
+          "min": 1,
+          "type": [
+            {
+              "code": "Quantity"
+            }
+          ]
+        },
+        {
+          "id": "de-daw",
+          "path": "ExplanationOfBenefit.supportingInfo",
+          "sliceName": "daw",
+          "label": "daw",
+          "short": "dispense as written",
+          "definition": "Dispense as written description",
+          "min": 0,
+          "max": "1",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ]
+        },
+        {
+          "id": "de-daw.category",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "daw",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "code": "dawcode"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-daw.valueCodeableConcept",
+          "path": "ExplanationOfBenefit.supportingInfo.valueCodeableConcept",
+          "label": "daw",
+          "min": 1,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ],
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "system": "https://bluebutton.cms.gov/resources/variables/daw_prod_slctn_cd"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-generic-brand",
+          "path": "ExplanationOfBenefit.supportingInfo",
+          "sliceName": "generic-brand",
+          "label": "generic-brand",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ]
+        },
+        {
+          "id": "de-generic-brand.category",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "generic-brand",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "code": "brandgeneric"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-generic-brand.valueString",
+          "path": "ExplanationOfBenefit.supportingInfo.valueString",
+          "label": "generic-brand",
+          "min": 1,
+          "type": [
+            {
+              "code": "string"
+            }
+          ]
+        },
+        {
+          "id": "de-prescribed-date",
+          "path": "ExplanationOfBenefit.supportingInfo",
+          "sliceName": "prescribed-date",
+          "label": "prescribed-date",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ]
+        },
+        {
+          "id": "de-prescribed-date.category",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "prescribed-date",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "code": "prescribeddate"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-prescribed-date.timing[x]",
+          "path": "ExplanationOfBenefit.supportingInfo.timing[x]",
+          "label": "prescribed-date",
+          "short": "timing date",
+          "min": 1,
+          "type": [
+            {
+              "code": "date"
+            }
+          ]
+        },
+        {
+          "id": "de-eob-insurance",
+          "path": "ExplanationOfBenefit.insurance",
+          "label": "eob-insurance",
+          "slicing": {
+            "description": "slice by type",
+            "rules": "open"
+          },
+          "min": 1,
+          "max": "*",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-insurance.id",
+          "path": "ExplanationOfBenefit.insurance.id",
+          "label": "eob-insurance",
+          "short": "set to reference id",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-insurance.focal",
+          "path": "ExplanationOfBenefit.insurance.focal",
+          "label": "eob-insurance",
+          "min": 1,
+          "type": [
+            {
+              "code": "boolean"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-insurance.coverage",
+          "path": "ExplanationOfBenefit.insurance.coverage",
+          "label": "eob-insurance",
+          "min": 1,
+          "type": [
+            {
+              "code": "Reference",
+              "targetProfile": [
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-insurance-coverage"
+              ]
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item",
+          "path": "ExplanationOfBenefit.item",
+          "label": "eob-item",
+          "slicing": {
+            "description": "slice by type",
+            "rules": "open"
+          },
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.id",
+          "path": "ExplanationOfBenefit.item.id",
+          "label": "eob-item",
+          "short": "set to id of the claim line item",
+          "comment": "usually line number",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.sequence",
+          "path": "ExplanationOfBenefit.item.sequence",
+          "label": "eob-item",
+          "short": "claim line number",
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.revenue",
+          "path": "ExplanationOfBenefit.item.revenue",
+          "label": "eob-item",
+          "short": "Revenue center code",
+          "requirements": "required for institutional claims",
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.productOrService",
+          "path": "ExplanationOfBenefit.item.productOrService",
+          "label": "eob-item",
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.modifier",
+          "path": "ExplanationOfBenefit.item.modifier",
+          "label": "eob-item",
+          "short": "modifier to the product code",
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.servicedPeriod",
+          "path": "ExplanationOfBenefit.item.serviced[x]",
+          "label": "eob-item",
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.quentity",
+          "path": "ExplanationOfBenefit.item.quantity",
+          "label": "eob-item",
+          "short": "days / units",
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.unitPrice",
+          "path": "ExplanationOfBenefit.item.unitPrice",
+          "label": "eob-item",
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.adjudication",
+          "path": "ExplanationOfBenefit.item.adjudication",
+          "label": "eob-item",
+          "mustSupport": true
+        },
+        {
+          "id": "de-drug-ndc",
+          "path": "ExplanationOfBenefit.item",
+          "sliceName": "drug-ndc",
+          "label": "drug-ndc",
+          "min": 0,
+          "max": "1",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ]
+        },
+        {
+          "id": "de-eob-total",
+          "path": "ExplanationOfBenefit.total",
+          "label": "eob-total",
+          "slicing": {
+            "description": "slice by type",
+            "rules": "open"
+          },
+          "min": 1,
+          "max": "*",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-total.id",
+          "path": "ExplanationOfBenefit.total.id",
+          "label": "eob-total",
+          "short": "set to category code",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-total.category",
+          "path": "ExplanationOfBenefit.total.category",
+          "label": "eob-total",
+          "min": 1,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-total.amount",
+          "path": "ExplanationOfBenefit.total.amount",
+          "label": "eob-total",
+          "min": 1,
+          "type": [
+            {
+              "code": "Money"
+            }
+          ],
+          "mustSupport": true
+        }
+      ]
+    }
+  }
+]
