@@ -1,0 +1,1581 @@
+[
+  {
+    "resourceType": "StructureDefinition",
+    "id": "pr-explanation-of-benefit-medical",
+    "meta": {
+      "source": "https://www.icanbwell.com/fhir_profile_definitions",
+      "security": [
+        {
+          "system": "https://www.icanbwell.com/owner",
+          "code": "bwell"
+        },
+        {
+          "system": "https://www.icanbwell.com/access",
+          "code": "bwell"
+        }
+      ]
+    },
+    "url": "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-explanation-of-benefit-medical",
+    "version": "1.02",
+    "name": "ExplanatonOfBenefitMedical",
+    "title": "Profile: Explanaton Of Benefit - Medical",
+    "status": "active",
+    "experimental": false,
+    "date": "2022-06-02",
+    "publisher": "bWell Connected Health",
+    "description": "Explanation of benefit resource for medical claims data",
+    "jurisdiction": [
+      {
+        "coding": [
+          {
+            "system": "urn:iso:std:iso:3166",
+            "code": "US",
+            "display": "United States of America"
+          }
+        ],
+        "text": "United States of America"
+      }
+    ],
+    "keyword": [
+      {
+        "system": "https://www.icanbwell.com/file-category-code",
+        "code": "med-claims"
+      }
+    ],
+    "fhirVersion": "4.0.0",
+    "kind": "resource",
+    "abstract": false,
+    "type": "ExplanationOfBenefit",
+    "baseDefinition": "http://hl7.org/fhir/StructureDefinition/ExplanationOfBenefit",
+    "derivation": "constraint",
+    "differential": {
+      "element": [
+        {
+          "id": "ExplanationOfBenefit",
+          "path": "ExplanationOfBenefit"
+        },
+        {
+          "id": "ExplanationOfBenefit.id",
+          "path": "ExplanationOfBenefit.id"
+        },
+        {
+          "id": "ExplanationOfBenefit.meta",
+          "path": "ExplanationOfBenefit.meta",
+          "label": "meta",
+          "min": 1,
+          "max": "1",
+          "type": [
+            {
+              "code": "Meta"
+            }
+          ]
+        },
+        {
+          "id": "ExplanationOfBenefit.meta.source",
+          "path": "ExplanationOfBenefit.meta.source",
+          "sliceName": "meta-source",
+          "label": "meta",
+          "short": "uri of the data source",
+          "definition": "Typically the data owner's URL followed by a source/file description",
+          "requirements": "mandatory for all resources in bWell's FHIR Server",
+          "min": 1,
+          "max": "1",
+          "type": [
+            {
+              "code": "uri"
+            }
+          ],
+          "example": [
+            {
+              "label": "example of meta.source",
+              "valueUri": "https://www.icanbwell.com/provider-directory"
+            }
+          ]
+        },
+        {
+          "id": "ExplanationOfBenefit.meta.security",
+          "path": "ExplanationOfBenefit.meta.security",
+          "sliceName": "meta-security",
+          "label": "meta",
+          "short": "security tags representing the data's owner, vendor, and accessibility",
+          "definition": "data owner: \n \n data vendor: \n \n data access: ",
+          "requirements": "/owner & /access are mandatory for all resources in bWell's FHIR Server",
+          "min": 1,
+          "max": "*",
+          "type": [
+            {
+              "code": "Coding"
+            }
+          ],
+          "example": [
+            {
+              "label": "example of data owner security tag",
+              "valueCoding": {
+                "system": "https://www.icanbwell.com/owner",
+                "code": "bwell"
+              }
+            },
+            {
+              "label": "example of data access security tag",
+              "valueCoding": {
+                "system": "https://www.icanbwell.com/access",
+                "code": "bwell"
+              }
+            },
+            {
+              "label": "example of data vendor security tag",
+              "valueCoding": {
+                "system": "https://www.icanbwell.com/vendor",
+                "code": "bwell"
+              }
+            }
+          ]
+        },
+        {
+          "id": "de-identifier",
+          "path": "ExplanationOfBenefit.identifier",
+          "label": "identifier",
+          "slicing": {
+            "description": "slice by types",
+            "rules": "open"
+          },
+          "short": "a value to identify the resource by",
+          "type": [
+            {
+              "code": "Identifier"
+            }
+          ]
+        },
+        {
+          "id": "identifier.id",
+          "path": "ExplanationOfBenefit.identifier.id",
+          "label": "identifier",
+          "short": "set case-by-case",
+          "min": 1,
+          "max": "1",
+          "type": [
+            {
+              "code": "string"
+            }
+          ]
+        },
+        {
+          "id": "identifier.use",
+          "path": "ExplanationOfBenefit.identifier.use",
+          "label": "identifier",
+          "short": "usual | official | temp | secondary | old (If known)",
+          "definition": "The purpose of this identifier.",
+          "min": 0,
+          "max": "1",
+          "type": [
+            {
+              "code": "code"
+            }
+          ]
+        },
+        {
+          "id": "identifier.type",
+          "path": "ExplanationOfBenefit.identifier.type",
+          "label": "identifier",
+          "short": "Description of identifier",
+          "definition": "A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.",
+          "requirements": "Needs binding valueset",
+          "min": 1,
+          "max": "1",
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ]
+        },
+        {
+          "id": "identifier.system",
+          "path": "ExplanationOfBenefit.identifier.system",
+          "label": "identifier",
+          "short": "The system which created the identifier",
+          "definition": "Values may be an oid, uri, url, or canonical",
+          "comment": "for mapped data, this is frequently a canonical url",
+          "min": 1,
+          "max": "1",
+          "type": [
+            {
+              "code": "uri"
+            }
+          ],
+          "example": [
+            {
+              "label": "a client's unknown system",
+              "valueUri": "https://www.health.org/person-identifier"
+            }
+          ]
+        },
+        {
+          "id": "identifier.value",
+          "path": "ExplanationOfBenefit.identifier.value",
+          "label": "identifier",
+          "short": "The unique value",
+          "definition": "The raw identifier value that represents a resource",
+          "requirements": "This should be the raw value, as it exists in the source data (ie without prefix)",
+          "min": 1,
+          "max": "1",
+          "type": [
+            {
+              "code": "string"
+            }
+          ]
+        },
+        {
+          "id": "de-claim-number",
+          "path": "ExplanationOfBenefit.identifier",
+          "sliceName": "claim-number",
+          "label": "claim-number",
+          "short": "An identifier to the insurance claim / EOB",
+          "type": [
+            {
+              "code": "Identifier"
+            }
+          ],
+          "patternIdentifier": {
+            "id": "claim-id",
+            "type": {
+              "coding": [
+                {
+                  "id": "claim-id-type",
+                  "code": "claimnumber"
+                }
+              ]
+            },
+            "system": "http://hl7.org/fhir/sid/us-mbi"
+          }
+        },
+        {
+          "id": "ExplanationOfBenefit.status",
+          "path": "ExplanationOfBenefit.status",
+          "short": "Claim status",
+          "comment": "default to active",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "ExplanationOfBenefit.type",
+          "path": "ExplanationOfBenefit.type",
+          "short": "Claim type",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "ExplanationOfBenefit.use",
+          "path": "ExplanationOfBenefit.use",
+          "short": "Fixed: 'claim'",
+          "min": 1,
+          "max": "1",
+          "fixedCode": "claim",
+          "mustSupport": true
+        },
+        {
+          "id": "ExplanationOfBenefit.patient",
+          "path": "ExplanationOfBenefit.patient",
+          "short": "Claim status",
+          "comment": "default to active",
+          "min": 1,
+          "max": "1",
+          "type": [
+            {
+              "code": "Reference",
+              "targetProfile": [
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-patient"
+              ]
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "ExplanationOfBenefit.billablePeriod",
+          "path": "ExplanationOfBenefit.billablePeriod",
+          "label": "billable-period",
+          "short": "Billable period",
+          "comment": "Sometimes only provided as dates of service",
+          "min": 1,
+          "type": [
+            {
+              "code": "Period"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "ExplanationOfBenefit.created",
+          "path": "ExplanationOfBenefit.created",
+          "short": "when the claim record was created",
+          "comment": "set to the ending date of service if not otherwise specified",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "ExplanationOfBenefit.insurer",
+          "path": "ExplanationOfBenefit.insurer",
+          "short": "Insurance company covering benefits",
+          "min": 1,
+          "type": [
+            {
+              "code": "Reference",
+              "targetProfile": [
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-insurance-company"
+              ]
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "ExplanationOfBenefit.provider",
+          "path": "ExplanationOfBenefit.provider",
+          "label": "billing-provider",
+          "short": "Billing organization",
+          "min": 1,
+          "max": "1",
+          "type": [
+            {
+              "code": "Reference",
+              "targetProfile": [
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-healthcare-organization"
+              ]
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "ExplanationOfBenefit.outcome",
+          "path": "ExplanationOfBenefit.outcome",
+          "short": "complete | partial",
+          "comment": "if not provided, presumed complete",
+          "min": 1,
+          "max": "1",
+          "mustSupport": true
+        },
+        {
+          "id": "de-care-team",
+          "path": "ExplanationOfBenefit.careTeam",
+          "label": "care-team",
+          "slicing": {
+            "description": "slice by type",
+            "rules": "open"
+          },
+          "short": "Providers listed on the claim",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-care-team.id",
+          "path": "ExplanationOfBenefit.careTeam.id",
+          "label": "care-team",
+          "short": "set as role code",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-care-team.sequence",
+          "path": "ExplanationOfBenefit.careTeam.sequence",
+          "label": "care-team",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-care-team.provider",
+          "path": "ExplanationOfBenefit.careTeam.provider",
+          "label": "care-team",
+          "min": 1,
+          "type": [
+            {
+              "code": "Reference",
+              "targetProfile": [
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-practitioner",
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-healthcare-organization"
+              ]
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-care-team.responsible",
+          "path": "ExplanationOfBenefit.careTeam.responsible",
+          "label": "care-team",
+          "min": 1,
+          "type": [
+            {
+              "code": "boolean"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-care-team.role",
+          "path": "ExplanationOfBenefit.careTeam.role",
+          "label": "care-team",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-care-team-attending",
+          "path": "ExplanationOfBenefit.careTeam",
+          "sliceName": "care-team-attending",
+          "label": "care-team-attending",
+          "min": 1
+        },
+        {
+          "id": "de-care-team-attending.sequence",
+          "path": "ExplanationOfBenefit.careTeam.sequence",
+          "label": "care-team-attending",
+          "min": 1
+        },
+        {
+          "id": "de-care-team-attending.responsible",
+          "path": "ExplanationOfBenefit.careTeam.responsible",
+          "label": "care-team-attending",
+          "min": 1
+        },
+        {
+          "id": "de-care-team-attending.role",
+          "path": "ExplanationOfBenefit.careTeam.role",
+          "label": "care-team-attending",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "id": "role-code",
+                "system": "http://terminology.hl7.org/CodeSystem/claimcareteamrole",
+                "code": "Attending"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-care-team-attending.provider",
+          "path": "ExplanationOfBenefit.careTeam.provider",
+          "label": "care-team-attending",
+          "min": 1,
+          "type": [
+            {
+              "code": "Reference",
+              "targetProfile": [
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-practitioner"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "de-care-team-operating",
+          "path": "ExplanationOfBenefit.careTeam",
+          "sliceName": "care-team-operating",
+          "label": "care-team-operating",
+          "min": 1
+        },
+        {
+          "id": "de-care-team-operating.sequence",
+          "path": "ExplanationOfBenefit.careTeam.sequence",
+          "label": "care-team-operating",
+          "min": 1
+        },
+        {
+          "id": "de-care-team-operating.responsible",
+          "path": "ExplanationOfBenefit.careTeam.responsible",
+          "label": "care-team-operating",
+          "min": 1
+        },
+        {
+          "id": "de-care-team-operating.role",
+          "path": "ExplanationOfBenefit.careTeam.role",
+          "label": "care-team-operating",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "id": "role-code",
+                "system": "http://terminology.hl7.org/CodeSystem/claimcareteamrole",
+                "code": "Operating"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-care-team-operating.provider",
+          "path": "ExplanationOfBenefit.careTeam.provider",
+          "label": "care-team-operating",
+          "min": 1,
+          "type": [
+            {
+              "code": "Reference",
+              "targetProfile": [
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-practitioner"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "de-care-team-rendering",
+          "path": "ExplanationOfBenefit.careTeam",
+          "sliceName": "care-team-rendering",
+          "label": "care-team-rendering",
+          "min": 1
+        },
+        {
+          "id": "de-care-team-rendering.sequence",
+          "path": "ExplanationOfBenefit.careTeam.sequence",
+          "label": "care-team-rendering",
+          "min": 1
+        },
+        {
+          "id": "de-care-team-rendering.responsible",
+          "path": "ExplanationOfBenefit.careTeam.responsible",
+          "label": "care-team-rendering",
+          "min": 1
+        },
+        {
+          "id": "de-care-team-rendering.role",
+          "path": "ExplanationOfBenefit.careTeam.role",
+          "label": "care-team-rendering",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "id": "role-code",
+                "system": "http://terminology.hl7.org/CodeSystem/claimcareteamrole",
+                "code": "Rendering"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-care-team-rendering.provider",
+          "path": "ExplanationOfBenefit.careTeam.provider",
+          "label": "care-team-rendering",
+          "min": 1,
+          "type": [
+            {
+              "code": "Reference",
+              "targetProfile": [
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-practitioner"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "de-supporting-info",
+          "path": "ExplanationOfBenefit.supportingInfo",
+          "label": "supporting-info",
+          "slicing": {
+            "description": "slice by type",
+            "rules": "open"
+          },
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-supporting-info.id",
+          "path": "ExplanationOfBenefit.supportingInfo.id",
+          "label": "supporting-info",
+          "short": "set to category code",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-supporting-info.sequence",
+          "path": "ExplanationOfBenefit.supportingInfo.sequence",
+          "label": "supporting-info",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-supporting-info.category",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "supporting-info",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-supporting-info.value[x]",
+          "path": "ExplanationOfBenefit.supportingInfo.value[x]",
+          "label": "supporting-info",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-type-of-bill",
+          "path": "ExplanationOfBenefit.supportingInfo",
+          "sliceName": "type-of-bill",
+          "label": "type-of-bill",
+          "short": "claim type",
+          "min": 0,
+          "max": "1",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ]
+        },
+        {
+          "id": "de-type-of-bill.sequence",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "type-of-bill",
+          "short": "Fixed: 1",
+          "fixedInteger": 1
+        },
+        {
+          "id": "de-type-of-bill.category",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "type-of-bill",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+                "code": "type-of-bill"
+              },
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/claiminformationcategory",
+                "code": "info"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-type-of-bill.valueString",
+          "path": "ExplanationOfBenefit.supportingInfo.valueString",
+          "label": "type-of-bill",
+          "min": 1,
+          "type": [
+            {
+              "code": "string"
+            }
+          ]
+        },
+        {
+          "id": "de-discharge-status",
+          "path": "ExplanationOfBenefit.supportingInfo",
+          "sliceName": "discharge-status",
+          "label": "discharge-status",
+          "short": "Discharge status",
+          "min": 0,
+          "max": "1",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ]
+        },
+        {
+          "id": "de-discharge-status.sequence",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "discharge-status",
+          "short": "Fixed: 2",
+          "fixedInteger": 2
+        },
+        {
+          "id": "de-discharge-status.category",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "discharge-status",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+                "code": "discharge-status"
+              },
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/claiminformationcategory",
+                "code": "discharge"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-discharge-status.code",
+          "path": "ExplanationOfBenefit.supportingInfo.code",
+          "label": "discharge-status",
+          "min": 1,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ]
+        },
+        {
+          "id": "de-admission-source",
+          "path": "ExplanationOfBenefit.supportingInfo",
+          "sliceName": "admission-source",
+          "label": "admission-source",
+          "short": "Admission source",
+          "min": 0,
+          "max": "1",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ]
+        },
+        {
+          "id": "de-admission-source.sequence",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "admission-source",
+          "short": "Fixed: 3",
+          "fixedInteger": 3
+        },
+        {
+          "id": "de-admission-source.category",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "admission-source",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+                "code": "admsrc"
+              },
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/claiminformationcategory",
+                "code": "info"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-admission-source.code",
+          "path": "ExplanationOfBenefit.supportingInfo.code",
+          "label": "admission-source",
+          "min": 1,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ]
+        },
+        {
+          "id": "de-admission-type",
+          "path": "ExplanationOfBenefit.supportingInfo",
+          "sliceName": "admission-type",
+          "label": "admission-type",
+          "short": "Admission type",
+          "min": 0,
+          "max": "1",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ]
+        },
+        {
+          "id": "de-admission-type.sequence",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "admission-type",
+          "short": "Fixed: 4",
+          "fixedInteger": 4
+        },
+        {
+          "id": "de-admission-type.category",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "admission-type",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+                "code": "admtype"
+              },
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/claiminformationcategory",
+                "code": "info"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-admission-type.code",
+          "path": "ExplanationOfBenefit.supportingInfo.code",
+          "label": "admission-type",
+          "min": 1,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ]
+        },
+        {
+          "id": "de-type-of-facilty",
+          "path": "ExplanationOfBenefit.supportingInfo",
+          "sliceName": "type-of-facilty",
+          "label": "type-of-facilty",
+          "short": "Type of facility",
+          "min": 0,
+          "max": "1",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ]
+        },
+        {
+          "id": "de-type-of-facilty.sequence",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "type-of-facilty",
+          "short": "Fixed: 5",
+          "fixedInteger": 5
+        },
+        {
+          "id": "de-type-of-facilty.category",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "type-of-facilty",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+                "code": "tob-typeoffacility"
+              },
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/claiminformationcategory",
+                "code": "info"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-type-of-facilty.code",
+          "path": "ExplanationOfBenefit.supportingInfo.code",
+          "label": "type-of-facilty",
+          "short": "bill type",
+          "min": 1,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ]
+        },
+        {
+          "id": "de-bill-classification",
+          "path": "ExplanationOfBenefit.supportingInfo",
+          "sliceName": "bill-classification",
+          "label": "bill-classification",
+          "short": "Bill classification",
+          "min": 0,
+          "max": "1",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ]
+        },
+        {
+          "id": "de-bill-classification.sequence",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "bill-classification",
+          "short": "Fixed: 6",
+          "fixedInteger": 6
+        },
+        {
+          "id": "de-bill-classification.category",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "bill-classification",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+                "code": "tob-billclassification"
+              },
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/claiminformationcategory",
+                "code": "info"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-bill-classification.code",
+          "path": "ExplanationOfBenefit.supportingInfo.code",
+          "label": "bill-classification",
+          "min": 1,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ]
+        },
+        {
+          "id": "de-frequency",
+          "path": "ExplanationOfBenefit.supportingInfo",
+          "sliceName": "frequency",
+          "label": "frequency",
+          "short": "Frequency code",
+          "min": 0,
+          "max": "1",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ]
+        },
+        {
+          "id": "de-frequency.sequence",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "frequency",
+          "short": "Fixed: 7",
+          "fixedInteger": 7
+        },
+        {
+          "id": "de-frequency.category",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "frequency",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+                "code": "tob-frequency"
+              },
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/claiminformationcategory",
+                "code": "info"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-frequency.code",
+          "path": "ExplanationOfBenefit.supportingInfo.code",
+          "label": "frequency",
+          "min": 1,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ]
+        },
+        {
+          "id": "de-place-of-service",
+          "path": "ExplanationOfBenefit.supportingInfo",
+          "sliceName": "place-of-service",
+          "label": "place-of-service",
+          "short": "Place of service",
+          "min": 0,
+          "max": "1",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ]
+        },
+        {
+          "id": "de-place-of-service.sequence",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "place-of-service",
+          "short": "Fixed: 8",
+          "fixedInteger": 8
+        },
+        {
+          "id": "de-place-of-service.category",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "place-of-service",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+                "code": "placeofservice"
+              },
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/claiminformationcategory",
+                "code": "info"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-place-of-service.code",
+          "path": "ExplanationOfBenefit.supportingInfo.code",
+          "label": "place-of-service",
+          "min": 1,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ]
+        },
+        {
+          "id": "de-received-date",
+          "path": "ExplanationOfBenefit.supportingInfo",
+          "sliceName": "received-date",
+          "label": "received-date",
+          "short": "Claim received date",
+          "min": 0,
+          "max": "1",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ]
+        },
+        {
+          "id": "de-received-date.category",
+          "path": "ExplanationOfBenefit.supportingInfo.category",
+          "label": "received-date",
+          "min": 1,
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "code": "claimreceiveddate"
+              },
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/claiminformationcategory",
+                "code": "info"
+              }
+            ]
+          }
+        },
+        {
+          "id": "de-received-date.timingDate",
+          "path": "ExplanationOfBenefit.supportingInfo.timing[x]",
+          "label": "received-date",
+          "short": "date value of when the claim was received",
+          "min": 1,
+          "type": [
+            {
+              "code": "date"
+            }
+          ]
+        },
+        {
+          "id": "de-diagnosis",
+          "path": "ExplanationOfBenefit.diagnosis",
+          "label": "diagnosis",
+          "slicing": {
+            "description": "slice by type",
+            "rules": "open"
+          },
+          "min": 0,
+          "max": "*",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-diagnosis.id",
+          "path": "ExplanationOfBenefit.diagnosis.id",
+          "label": "diagnosis",
+          "short": "set to sequence number",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-diagnosis.sequence",
+          "path": "ExplanationOfBenefit.diagnosis.sequence",
+          "label": "diagnosis",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-diagnosis.diagnosisCodeableConcept",
+          "path": "ExplanationOfBenefit.diagnosis.diagnosis[x]",
+          "label": "diagnosis",
+          "short": "ICD diagnosis code",
+          "min": 1,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-diagnosis.type",
+          "path": "ExplanationOfBenefit.diagnosis.type",
+          "label": "diagnosis",
+          "comment": "typically retrospective",
+          "min": 0,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ],
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://terminology.hl7.org/CodeSystem/ex-diagnosistype"
+              }
+            ]
+          },
+          "mustSupport": true
+        },
+        {
+          "id": "de-diagnosis.onAdmission",
+          "path": "ExplanationOfBenefit.diagnosis.onAdmission",
+          "label": "diagnosis",
+          "min": 0,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-diagnosis.packageCode",
+          "path": "ExplanationOfBenefit.diagnosis.packageCode",
+          "label": "DRG",
+          "short": "DRG",
+          "min": 0,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-procedure",
+          "path": "ExplanationOfBenefit.procedure",
+          "label": "procedure",
+          "slicing": {
+            "description": "slice by type",
+            "rules": "open"
+          },
+          "min": 0,
+          "max": "*",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-procedure.id",
+          "path": "ExplanationOfBenefit.procedure.id",
+          "label": "procedure",
+          "short": "set to sequence number",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-procedure.sequence",
+          "path": "ExplanationOfBenefit.procedure.sequence",
+          "label": "procedure",
+          "short": "Claim line number",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-procedure.date",
+          "path": "ExplanationOfBenefit.procedure.date",
+          "label": "procedure",
+          "short": "date of service",
+          "comment": "When date of service is provided as a date range, use the starting ('from') date",
+          "min": 1,
+          "type": [
+            {
+              "code": "dateTime"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-procedure.procedureCodeableConcept",
+          "path": "ExplanationOfBenefit.procedure.procedure[x]",
+          "label": "procedure",
+          "short": "Procedure code",
+          "min": 1,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ],
+          "patternCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/sid/ex-icd-10-procedures"
+              }
+            ]
+          },
+          "mustSupport": true
+        },
+        {
+          "id": "de-insurance",
+          "path": "ExplanationOfBenefit.insurance",
+          "label": "insurance",
+          "slicing": {
+            "description": "slice by type",
+            "rules": "open"
+          },
+          "min": 1,
+          "max": "*",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-insurance.id",
+          "path": "ExplanationOfBenefit.insurance.id",
+          "label": "insurance",
+          "short": "set to refrence id",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-insurance.focal",
+          "path": "ExplanationOfBenefit.insurance.focal",
+          "label": "insurance",
+          "min": 1,
+          "type": [
+            {
+              "code": "boolean"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-insurance.coverage",
+          "path": "ExplanationOfBenefit.insurance.coverage",
+          "label": "insurance",
+          "short": "Insurance coverage",
+          "min": 1,
+          "type": [
+            {
+              "code": "Reference",
+              "targetProfile": [
+                "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-insurance-coverage"
+              ]
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item",
+          "path": "ExplanationOfBenefit.item",
+          "label": "eob-item",
+          "slicing": {
+            "description": "slice by type",
+            "rules": "open"
+          },
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.id",
+          "path": "ExplanationOfBenefit.item.id",
+          "label": "eob-item",
+          "short": "set to id of the claim line item",
+          "comment": "usually line number",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.sequence",
+          "path": "ExplanationOfBenefit.item.sequence",
+          "label": "eob-item",
+          "short": "claim line number",
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.revenue",
+          "path": "ExplanationOfBenefit.item.revenue",
+          "label": "eob-item",
+          "short": "Revenue center code",
+          "requirements": "required for institutional claims",
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.productOrService",
+          "path": "ExplanationOfBenefit.item.productOrService",
+          "label": "eob-item",
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.modifier",
+          "path": "ExplanationOfBenefit.item.modifier",
+          "label": "eob-item",
+          "short": "modifier to the product code",
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.servicedPeriod",
+          "path": "ExplanationOfBenefit.item.serviced[x]",
+          "label": "eob-item",
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.quentity",
+          "path": "ExplanationOfBenefit.item.quantity",
+          "label": "eob-item",
+          "short": "days / units",
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.unitPrice",
+          "path": "ExplanationOfBenefit.item.unitPrice",
+          "label": "eob-item",
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-item.adjudication",
+          "path": "ExplanationOfBenefit.item.adjudication",
+          "label": "eob-item",
+          "mustSupport": true
+        },
+        {
+          "id": "de-adjudication",
+          "path": "ExplanationOfBenefit.adjudication",
+          "label": "adjudication",
+          "slicing": {
+            "description": "slice by type",
+            "rules": "open"
+          },
+          "definition": "Monetary figures including: payment, submitted, allowed, copay, deductible, coinsurance, and cob amounts",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-adjudication.id",
+          "path": "ExplanationOfBenefit.adjudication.id",
+          "label": "adjudication",
+          "short": "set to category code",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-adjudication.category",
+          "path": "ExplanationOfBenefit.adjudication.category",
+          "label": "adjudication",
+          "short": "Amount type category",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-adjudication.reason",
+          "path": "ExplanationOfBenefit.adjudication.reason",
+          "label": "adjudication",
+          "short": "adjudication reason, if provided",
+          "min": 0,
+          "mustSupport": true
+        },
+        {
+          "id": "de-adjudication.amount",
+          "path": "ExplanationOfBenefit.adjudication.amount",
+          "label": "adjudication",
+          "short": "Financial amount",
+          "type": [
+            {
+              "code": "Money"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-submitted-amount",
+          "path": "ExplanationOfBenefit.adjudication",
+          "sliceName": "submitted-amount",
+          "label": "submitted-amount",
+          "slicing": {
+            "description": "slice by type",
+            "rules": "open"
+          },
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-submitted-amount.id",
+          "path": "ExplanationOfBenefit.adjudication.id",
+          "label": "submitted-amount",
+          "short": "submitted",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-submitted-amount.category",
+          "path": "ExplanationOfBenefit.adjudication.category",
+          "label": "submitted-amount",
+          "min": 1,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-allowed-amount",
+          "path": "ExplanationOfBenefit.adjudication",
+          "sliceName": "allowed-amount",
+          "label": "allowed-amount",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-allowed-amount.id",
+          "path": "ExplanationOfBenefit.adjudication.id",
+          "label": "allowed-amount",
+          "short": "allowed",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-allowed-amount.category",
+          "path": "ExplanationOfBenefit.adjudication.category",
+          "label": "allowed-amount",
+          "min": 1,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-copay-amount",
+          "path": "ExplanationOfBenefit.adjudication",
+          "sliceName": "copay-amount",
+          "label": "copay-amount",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-copay-amount.id",
+          "path": "ExplanationOfBenefit.adjudication.id",
+          "label": "copay-amount",
+          "short": "copay",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-copay-amount.category",
+          "path": "ExplanationOfBenefit.adjudication.category",
+          "label": "copay-amount",
+          "min": 1,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-total",
+          "path": "ExplanationOfBenefit.total",
+          "label": "eob-total",
+          "slicing": {
+            "description": "slice by type",
+            "rules": "open"
+          },
+          "min": 1,
+          "max": "*",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-total.id",
+          "path": "ExplanationOfBenefit.total.id",
+          "label": "eob-total",
+          "short": "set to category code",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-total.category",
+          "path": "ExplanationOfBenefit.total.category",
+          "label": "eob-total",
+          "min": 1,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-eob-total.amount",
+          "path": "ExplanationOfBenefit.total.amount",
+          "label": "eob-total",
+          "min": 1,
+          "type": [
+            {
+              "code": "Money"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-payment-amount",
+          "path": "ExplanationOfBenefit.adjudication",
+          "sliceName": "payment-amount",
+          "label": "payment-amount",
+          "type": [
+            {
+              "code": "BackboneElement"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "de-payment-amount.id",
+          "path": "ExplanationOfBenefit.adjudication.id",
+          "label": "payment-amount",
+          "short": "payment",
+          "min": 1,
+          "mustSupport": true
+        },
+        {
+          "id": "de-payment-amount.category",
+          "path": "ExplanationOfBenefit.adjudication.category",
+          "label": "payment-amount",
+          "min": 1,
+          "type": [
+            {
+              "code": "CodeableConcept"
+            }
+          ],
+          "mustSupport": true
+        },
+        {
+          "id": "ExplanationOfBenefit.benefitPeriod",
+          "path": "ExplanationOfBenefit.benefitPeriod",
+          "mustSupport": true
+        }
+      ]
+    }
+  }
+]

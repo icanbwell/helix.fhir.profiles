@@ -1,0 +1,896 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "pr-patient",
+  "meta": {
+    "source": "https://www.icanbwell.com/fhir_profile_definitions",
+    "security": [
+      {
+        "system": "https://www.icanbwell.com/owner",
+        "code": "bwell"
+      },
+      {
+        "system": "https://www.icanbwell.com/access",
+        "code": "bwell"
+      }
+    ]
+  },
+  "url": "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-patient",
+  "version": "1.02",
+  "name": "Patient",
+  "title": "Profile: Patient",
+  "status": "active",
+  "experimental": false,
+  "date": "2022-06-02",
+  "publisher": "bWell Connected Health",
+  "description": "Includes but is not limited to: \n \n * Receiver of healthcare services \n \n * Beneficiary of an insurance plan \n \n * bWell app user \n \n * Employee",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "US",
+          "display": "United States of America"
+        }
+      ],
+      "text": "United States of America"
+    }
+  ],
+  "keyword": [
+    {
+      "system": "https://www.icanbwell.com/file-category-code",
+      "code": "eligibility"
+    },
+    {
+      "system": "https://www.icanbwell.com/file-category-code",
+      "code": "employee"
+    },
+    {
+      "system": "https://www.icanbwell.com/file-category-code",
+      "code": "rx-claims"
+    },
+    {
+      "system": "https://www.icanbwell.com/file-category-code",
+      "code": "med-claims"
+    }
+  ],
+  "fhirVersion": "4.0.0",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Patient",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Patient",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Patient",
+        "path": "Patient"
+      },
+      {
+        "id": "Patient.id",
+        "path": "Patient.id"
+      },
+      {
+        "id": "Patient.meta",
+        "path": "Patient.meta",
+        "label": "meta",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Meta"
+          }
+        ]
+      },
+      {
+        "id": "Patient.meta.source",
+        "path": "Patient.meta.source",
+        "sliceName": "meta-source",
+        "label": "meta",
+        "short": "uri of the data source",
+        "definition": "Typically the data owner's URL followed by a source/file description",
+        "requirements": "mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of meta.source",
+            "valueUri": "https://www.icanbwell.com/provider-directory"
+          }
+        ]
+      },
+      {
+        "id": "Patient.meta.security",
+        "path": "Patient.meta.security",
+        "sliceName": "meta-security",
+        "label": "meta",
+        "short": "security tags representing the data's owner, vendor, and accessibility",
+        "definition": "data owner: \n \n data vendor: \n \n data access: ",
+        "requirements": "/owner & /access are mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of data owner security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/owner",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data access security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/access",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data vendor security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/vendor",
+              "code": "bwell"
+            }
+          }
+        ]
+      },
+      {
+        "id": "de-identifier",
+        "path": "Patient.identifier",
+        "label": "identifier",
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "short": "a value to identify the resource by",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ]
+      },
+      {
+        "id": "identifier.id",
+        "path": "Patient.identifier.id",
+        "label": "identifier",
+        "short": "set case-by-case",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "identifier.use",
+        "path": "Patient.identifier.use",
+        "label": "identifier",
+        "short": "usual | official | temp | secondary | old (If known)",
+        "definition": "The purpose of this identifier.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ]
+      },
+      {
+        "id": "identifier.type",
+        "path": "Patient.identifier.type",
+        "label": "identifier",
+        "short": "Description of identifier",
+        "definition": "A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.",
+        "requirements": "Needs binding valueset",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "identifier.system",
+        "path": "Patient.identifier.system",
+        "label": "identifier",
+        "short": "The system which created the identifier",
+        "definition": "Values may be an oid, uri, url, or canonical",
+        "comment": "for mapped data, this is frequently a canonical url",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "a client's unknown system",
+            "valueUri": "https://www.health.org/person-identifier"
+          }
+        ]
+      },
+      {
+        "id": "identifier.value",
+        "path": "Patient.identifier.value",
+        "label": "identifier",
+        "short": "The unique value",
+        "definition": "The raw identifier value that represents a resource",
+        "requirements": "This should be the raw value, as it exists in the source data (ie without prefix)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "de-member-number",
+        "path": "Patient.identifier",
+        "sliceName": "identifier-member-number",
+        "label": "identifier-member-number",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code"
+          }
+        ],
+        "short": "insurance coverage's unique identifier for the individual",
+        "requirements": "system = source URI",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "patternIdentifier": {
+          "id": "member-number",
+          "type": {
+            "coding": [
+              {
+                "id": "member-number-type",
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "MB"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "de-employee-id",
+        "path": "Patient.identifier",
+        "sliceName": "identifier-employee-id",
+        "label": "employee-id",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "employment"
+          }
+        ],
+        "short": "employer's's unique identifier for the individual",
+        "requirements": "system = source URI",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "patternIdentifier": {
+          "id": "employee-id",
+          "type": {
+            "coding": [
+              {
+                "id": "employee-id-type",
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "EI"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "de-ssn",
+        "path": "Patient.identifier",
+        "sliceName": "ssn",
+        "label": "ssn",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "Person"
+          }
+        ],
+        "short": "social security number",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "patternIdentifier": {
+          "id": "ssn",
+          "type": {
+            "coding": [
+              {
+                "id": "ssn-type",
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "SS"
+              }
+            ]
+          },
+          "system": "http://hl7.org/fhir/sid/us-ssn"
+        }
+      },
+      {
+        "id": "Patient.active",
+        "path": "Patient.active",
+        "short": "resource active flag",
+        "definition": "indication of whether the resource is still in use",
+        "comment": "default to true",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-person-name",
+        "path": "Patient.name",
+        "sliceName": "person-name",
+        "label": "person-name",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "Person"
+          }
+        ],
+        "short": "An individual's name",
+        "type": [
+          {
+            "code": "HumanName"
+          }
+        ]
+      },
+      {
+        "id": "de-person-name.id",
+        "path": "Patient.name.id",
+        "label": "person-name",
+        "short": "source prefix - name",
+        "min": 1
+      },
+      {
+        "id": "de-person-name.use",
+        "path": "Patient.name.use",
+        "label": "person-name",
+        "short": "usual | official | temp | nickname | anonymous | old | maiden"
+      },
+      {
+        "id": "de-person-name.text",
+        "path": "Patient.name.text",
+        "label": "person-name",
+        "short": "Full text representation of the full name",
+        "alias": [
+          "full name"
+        ],
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "de-person-name.family",
+        "path": "Patient.name.family",
+        "label": "person-name",
+        "short": "Last name",
+        "alias": [
+          "last name",
+          "surname"
+        ],
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "de-person-name.given",
+        "path": "Patient.name.given",
+        "label": "person-name",
+        "short": "First and middle names",
+        "alias": [
+          "first name",
+          "middle name",
+          "middle initial"
+        ],
+        "min": 1,
+        "max": "*"
+      },
+      {
+        "id": "de-person-name.prefix",
+        "path": "Patient.name.prefix",
+        "label": "person-name"
+      },
+      {
+        "id": "de-person-name.suffix",
+        "path": "Patient.name.suffix",
+        "label": "person-name"
+      },
+      {
+        "id": "de-person-name.period",
+        "path": "Patient.name.period",
+        "label": "person-name"
+      },
+      {
+        "id": "de-contact-point",
+        "path": "Patient.telecom",
+        "label": "contact-point",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "short": "Details of a technology-based contact point",
+        "definition": "phone, fax, etc",
+        "type": [
+          {
+            "code": "ContactPoint"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "contact-point.id",
+        "path": "Patient.telecom.id",
+        "label": "contact-point",
+        "short": "set to use and type code(s)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "contact-point.system",
+        "path": "Patient.telecom.system",
+        "label": "contact-point",
+        "short": "phone | fax | email | pager | url | sms | other",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ]
+      },
+      {
+        "id": "contact-point.value",
+        "path": "Patient.telecom.value",
+        "label": "contact-point",
+        "short": "The value of the contact point",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "contact-point.use",
+        "path": "Patient.telecom.use",
+        "label": "contact-point",
+        "short": "home | work | temp | old | mobile - purpose of this contact point",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ]
+      },
+      {
+        "id": "de-personal-phone",
+        "path": "Patient.telecom",
+        "sliceName": "personal-phone",
+        "label": "personal-phone",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "Contact phone number for the individiaul",
+        "type": [
+          {
+            "code": "ContactPoint"
+          }
+        ],
+        "patternContactPoint": {
+          "id": "personal-phone",
+          "system": "phone",
+          "use": "work"
+        }
+      },
+      {
+        "id": "de-personal-email",
+        "path": "Patient.telecom",
+        "sliceName": "personal-email",
+        "label": "personal-email",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "Contact email address for the individual",
+        "type": [
+          {
+            "code": "ContactPoint"
+          }
+        ],
+        "patternContactPoint": {
+          "id": "personal-email",
+          "system": "email",
+          "use": "work"
+        }
+      },
+      {
+        "id": "de-business-phone",
+        "path": "Patient.telecom",
+        "sliceName": "business-phone",
+        "label": "business-phone",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "Contact phone number for the business",
+        "type": [
+          {
+            "code": "ContactPoint"
+          }
+        ],
+        "patternContactPoint": {
+          "id": "business-phone",
+          "system": "phone",
+          "use": "work"
+        }
+      },
+      {
+        "id": "de-business-email",
+        "path": "Patient.telecom",
+        "sliceName": "business-email",
+        "label": "business-email",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "Contact email address for the individual",
+        "type": [
+          {
+            "code": "ContactPoint"
+          }
+        ],
+        "patternContactPoint": {
+          "id": "business-email",
+          "system": "email",
+          "use": "work"
+        }
+      },
+      {
+        "id": "Patient.gender",
+        "path": "Patient.gender",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "Person"
+          }
+        ],
+        "short": "male | female | unknown",
+        "alias": [
+          "sex"
+        ],
+        "mustSupport": false
+      },
+      {
+        "id": "Patient.birthDate",
+        "path": "Patient.birthDate",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "Person"
+          }
+        ],
+        "short": "the individual's date of birth",
+        "type": [
+          {
+            "code": "date"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address",
+        "path": "Patient.address",
+        "label": "address",
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "short": "An address expressed using postal conventions",
+        "definition": "A physical or postal address",
+        "type": [
+          {
+            "code": "Address"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-id",
+        "path": "Patient.address.id",
+        "label": "address",
+        "short": "pattern: use - type - 'current'/period-end in MMDDYYYY format",
+        "definition": "A unique identifier for the element within a given resource",
+        "comment": "incoming addresses are presumed current unless otherwise specified",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "example": [
+          {
+            "label": "id example of a current address",
+            "valueString": "home-both-current"
+          },
+          {
+            "label": "id example of a previous address",
+            "valueString": "home-old-2022"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-use",
+        "path": "Patient.address.use",
+        "label": "address",
+        "short": "home | work | temp | billing",
+        "definition": "The purpose of the address",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-type",
+        "path": "Patient.address.type",
+        "label": "address",
+        "short": "postal | physical | both (presumed both if absent)",
+        "definition": "The type of an address (physical/postal)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-text",
+        "path": "Patient.address.text",
+        "label": "address",
+        "short": "Text representation of the address",
+        "definition": "Specifies the entire address as it should be displayed e.g. on a postal label",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-line",
+        "path": "Patient.address.line",
+        "label": "address",
+        "short": "Street name, number, direction & P.O. Box etc",
+        "comment": "addresses are subjected to a standardization process that may alter these values",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-city",
+        "path": "Patient.address.city",
+        "label": "address",
+        "short": "City name",
+        "comment": "addresses are subjected to a standardization process that may alter these values",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-district",
+        "path": "Patient.address.district",
+        "label": "address",
+        "short": "District name (aka county)",
+        "comment": "addresses are subjected to a standardization process that may alter these values",
+        "alias": [
+          "county"
+        ],
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-state",
+        "path": "Patient.address.state",
+        "label": "address",
+        "short": "two-digit state code preferred",
+        "comment": "addresses are subjected to a standardization process that may alter these values",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-postalCode",
+        "path": "Patient.address.postalCode",
+        "label": "address",
+        "short": "zip code",
+        "comment": "addresses are subjected to a standardization process that may alter these values",
+        "requirements": "no current structure preference",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-country",
+        "path": "Patient.address.country",
+        "label": "address",
+        "comment": "addresses are subjected to a standardization process that may alter these values",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "de-address-period",
+        "path": "Patient.address.period",
+        "label": "address",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Period"
+          }
+        ]
+      },
+      {
+        "id": "de-related-contact",
+        "path": "Patient.contact",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code"
+          }
+        ],
+        "short": "family contact(s)",
+        "definition": "Other individuals related to this patient",
+        "comment": "insurance plan subscribers with dependents should have dependents listed, and vice versa",
+        "alias": [
+          "health-circle",
+          "dependent",
+          "subscriber"
+        ],
+        "min": 0,
+        "max": "*",
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.contact.id",
+        "path": "Patient.contact.id",
+        "short": "referenced id",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Patient.contact.extension",
+        "path": "Patient.contact.extension",
+        "sliceName": "related-contact",
+        "label": "related-contact",
+        "short": "Extension to reference another Patient resource",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/ex-contact-related-patient"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Patient.contact.relationship",
+        "path": "Patient.contact.relationship",
+        "short": "relationship code",
+        "definition": "Dependent Code (SUB,SPS,CHD,UNK)"
+      },
+      {
+        "id": "Patient.communication",
+        "path": "Patient.communication",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.communication.id",
+        "path": "Patient.communication.id",
+        "short": "language code",
+        "min": 1
+      },
+      {
+        "id": "Patient.communication.language",
+        "path": "Patient.communication.language",
+        "min": 1,
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      }
+    ]
+  }
+}

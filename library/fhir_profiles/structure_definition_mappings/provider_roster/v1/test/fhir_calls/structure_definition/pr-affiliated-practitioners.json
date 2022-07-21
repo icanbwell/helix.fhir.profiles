@@ -1,0 +1,262 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "pr-affiliated-practitioners",
+  "meta": {
+    "source": "https://www.icanbwell.com/fhir_profile_definitions",
+    "security": [
+      {
+        "system": "https://www.icanbwell.com/owner",
+        "code": "bwell"
+      },
+      {
+        "system": "https://www.icanbwell.com/access",
+        "code": "bwell"
+      }
+    ]
+  },
+  "url": "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-affiliated-practitioners",
+  "version": "1.02",
+  "name": "AffiliatedPractitioners",
+  "title": "Profile: Affiliated Practitioners",
+  "status": "active",
+  "experimental": false,
+  "date": "2022-06-02",
+  "publisher": "bWell Connected Health",
+  "description": "A group of practitioners that are affiliated with a health system",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "US",
+          "display": "United States of America"
+        }
+      ],
+      "text": "United States of America"
+    }
+  ],
+  "keyword": [
+    {
+      "system": "https://www.icanbwell.com/file-category-code",
+      "code": "provider-roster"
+    }
+  ],
+  "fhirVersion": "4.0.0",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Group",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Group",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Group",
+        "path": "Group"
+      },
+      {
+        "id": "Group.id",
+        "path": "Group.id"
+      },
+      {
+        "id": "Group.meta",
+        "path": "Group.meta",
+        "label": "meta",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Meta"
+          }
+        ]
+      },
+      {
+        "id": "Group.meta.source",
+        "path": "Group.meta.source",
+        "sliceName": "meta-source",
+        "label": "meta",
+        "short": "uri of the data source",
+        "definition": "Typically the data owner's URL followed by a source/file description",
+        "requirements": "mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of meta.source",
+            "valueUri": "https://www.icanbwell.com/provider-directory"
+          }
+        ]
+      },
+      {
+        "id": "Group.meta.security",
+        "path": "Group.meta.security",
+        "sliceName": "meta-security",
+        "label": "meta",
+        "short": "security tags representing the data's owner, vendor, and accessibility",
+        "definition": "data owner: \n \n data vendor: \n \n data access: ",
+        "requirements": "/owner & /access are mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of data owner security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/owner",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data access security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/access",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data vendor security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/vendor",
+              "code": "bwell"
+            }
+          }
+        ]
+      },
+      {
+        "id": "Group.active",
+        "path": "Group.active",
+        "short": "True | False",
+        "min": 1,
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Group.type",
+        "path": "Group.type",
+        "short": "fixed code: 'practitioner'",
+        "min": 1,
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "fixedCode": "practitioner",
+        "mustSupport": true
+      },
+      {
+        "id": "Group.actual",
+        "path": "Group.actual",
+        "short": "fixed: True",
+        "min": 1,
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
+        "fixedBoolean": true,
+        "mustSupport": true
+      },
+      {
+        "id": "Group.name",
+        "path": "Group.name",
+        "short": "Name of the Group",
+        "definition": "The practitioner affiliation group name",
+        "min": 1,
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Group.managingEntity",
+        "path": "Group.managingEntity",
+        "short": "Organization to which the practitioners belong",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-healthcare-organization"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-group-member",
+        "path": "Group.member",
+        "label": "group-member",
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-group-member-id",
+        "path": "Group.member.id",
+        "label": "group-member",
+        "short": "set to reference id",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-group-member-entity",
+        "path": "Group.member.entity",
+        "label": "group-member",
+        "short": "practitioner",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-practitioner"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-group-member-inactive",
+        "path": "Group.member.inactive",
+        "label": "group-member",
+        "short": "active status",
+        "comment": "default to false",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
+        "mustSupport": true
+      }
+    ]
+  }
+}

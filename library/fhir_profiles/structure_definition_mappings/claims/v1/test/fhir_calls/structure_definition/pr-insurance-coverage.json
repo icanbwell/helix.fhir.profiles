@@ -1,0 +1,465 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "pr-insurance-coverage",
+  "meta": {
+    "source": "https://www.icanbwell.com/fhir_profile_definitions",
+    "security": [
+      {
+        "system": "https://www.icanbwell.com/owner",
+        "code": "bwell"
+      },
+      {
+        "system": "https://www.icanbwell.com/access",
+        "code": "bwell"
+      }
+    ]
+  },
+  "url": "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-insurance-coverage",
+  "version": "1.02",
+  "name": "InsuranceCoverage",
+  "title": "Profile: Insurance Coverage",
+  "status": "active",
+  "experimental": false,
+  "date": "2022-06-02",
+  "publisher": "bWell Connected Health",
+  "description": "Insurance coverage for a beneficiary",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "US",
+          "display": "United States of America"
+        }
+      ],
+      "text": "United States of America"
+    }
+  ],
+  "keyword": [
+    {
+      "system": "https://www.icanbwell.com/file-category-code",
+      "code": "eligibility"
+    }
+  ],
+  "fhirVersion": "4.0.0",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Coverage",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Coverage",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Coverage",
+        "path": "Coverage"
+      },
+      {
+        "id": "Coverage.id",
+        "path": "Coverage.id"
+      },
+      {
+        "id": "Coverage.meta",
+        "path": "Coverage.meta",
+        "label": "meta",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Meta"
+          }
+        ]
+      },
+      {
+        "id": "Coverage.meta.source",
+        "path": "Coverage.meta.source",
+        "sliceName": "meta-source",
+        "label": "meta",
+        "short": "uri of the data source",
+        "definition": "Typically the data owner's URL followed by a source/file description",
+        "requirements": "mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of meta.source",
+            "valueUri": "https://www.icanbwell.com/provider-directory"
+          }
+        ]
+      },
+      {
+        "id": "Coverage.meta.security",
+        "path": "Coverage.meta.security",
+        "sliceName": "meta-security",
+        "label": "meta",
+        "short": "security tags representing the data's owner, vendor, and accessibility",
+        "definition": "data owner: \n \n data vendor: \n \n data access: ",
+        "requirements": "/owner & /access are mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of data owner security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/owner",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data access security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/access",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data vendor security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/vendor",
+              "code": "bwell"
+            }
+          }
+        ]
+      },
+      {
+        "id": "de-identifier",
+        "path": "Coverage.identifier",
+        "label": "identifier",
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "short": "a value to identify the resource by",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ]
+      },
+      {
+        "id": "identifier.id",
+        "path": "Coverage.identifier.id",
+        "label": "identifier",
+        "short": "set case-by-case",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "identifier.use",
+        "path": "Coverage.identifier.use",
+        "label": "identifier",
+        "short": "usual | official | temp | secondary | old (If known)",
+        "definition": "The purpose of this identifier.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ]
+      },
+      {
+        "id": "identifier.type",
+        "path": "Coverage.identifier.type",
+        "label": "identifier",
+        "short": "Description of identifier",
+        "definition": "A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.",
+        "requirements": "Needs binding valueset",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "identifier.system",
+        "path": "Coverage.identifier.system",
+        "label": "identifier",
+        "short": "The system which created the identifier",
+        "definition": "Values may be an oid, uri, url, or canonical",
+        "comment": "for mapped data, this is frequently a canonical url",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "a client's unknown system",
+            "valueUri": "https://www.health.org/person-identifier"
+          }
+        ]
+      },
+      {
+        "id": "identifier.value",
+        "path": "Coverage.identifier.value",
+        "label": "identifier",
+        "short": "The unique value",
+        "definition": "The raw identifier value that represents a resource",
+        "requirements": "This should be the raw value, as it exists in the source data (ie without prefix)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "de-member-number",
+        "path": "Coverage.identifier",
+        "sliceName": "identifier-member-number",
+        "label": "identifier-member-number",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code"
+          }
+        ],
+        "short": "insurance coverage's unique identifier for the individual",
+        "requirements": "system = source URI",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "patternIdentifier": {
+          "id": "member-number",
+          "type": {
+            "coding": [
+              {
+                "id": "member-number-type",
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "MB"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "de-medicare-beneficiary-id",
+        "path": "Coverage.identifier",
+        "sliceName": "medicare-beneficiary-id",
+        "label": "medicare-beneficiary-id",
+        "short": "Medicare Beneficiary Identifier (US)",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "patternIdentifier": {
+          "id": "mbi",
+          "type": {
+            "coding": [
+              {
+                "id": "mbi-type",
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "MC"
+              }
+            ]
+          },
+          "system": "http://hl7.org/fhir/sid/us-mbi"
+        }
+      },
+      {
+        "id": "Coverage.status",
+        "path": "Coverage.status",
+        "short": "Indicates validity of the resource",
+        "comment": "record should remain active, even after coverage termination",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.type",
+        "path": "Coverage.type",
+        "short": "Type of coverage represented",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://www.hl7.org/fhir/us/bwell/bwell-vs-coverage-type"
+        }
+      },
+      {
+        "id": "Coverage.subscriber",
+        "path": "Coverage.subscriber",
+        "short": "Subscriber of the insurance plan policy",
+        "comment": "this may be the same individual as the beneficiary",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.subscriberId",
+        "path": "Coverage.subscriberId",
+        "short": "The subscribing individual's unique member number",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.beneficiary",
+        "path": "Coverage.beneficiary",
+        "short": "Beneficiary of the insurance plan coverage",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.dependent",
+        "path": "Coverage.dependent",
+        "short": "Sequence number for the dependent",
+        "requirements": "Only needed if the individual is a dependent; If the individual is the subscriber, this should be omitted",
+        "min": 0,
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.relationship",
+        "path": "Coverage.relationship",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://www.hl7.org/fhir/us/bwell/bwell-vs-relationship"
+        }
+      },
+      {
+        "id": "Coverage.period",
+        "path": "Coverage.period",
+        "short": "Effective date range",
+        "min": 1,
+        "type": [
+          {
+            "code": "Period"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.payor",
+        "path": "Coverage.payor",
+        "short": "Paying entity",
+        "comment": "Typically the Insurance Company",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-insurance-company",
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-partner-organization"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.class",
+        "path": "Coverage.class",
+        "label": "group",
+        "short": "Group and subgroup",
+        "definition": "The codes provided on the health card which identify or confirm the specific policy for the insurer.",
+        "alias": [
+          "group id"
+        ],
+        "min": 0,
+        "max": "*",
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.class.type",
+        "path": "Coverage.class.type",
+        "short": "Coded value to describe the class",
+        "definition": "The policy classifications, eg. Group, Plan, Class, etc.",
+        "min": 1,
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "example": [
+          {
+            "label": "Group type",
+            "valueCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://terminology.hl7.org/CodeSystem/coverage-class",
+                  "code": "group"
+                }
+              ]
+            }
+          }
+        ],
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://www.hl7.org/fhir/us/bwell/bwell-vs-coverage-class-type"
+        }
+      },
+      {
+        "id": "Coverage.class.value",
+        "path": "Coverage.class.value",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.class.name",
+        "path": "Coverage.class.name",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      }
+    ]
+  }
+}

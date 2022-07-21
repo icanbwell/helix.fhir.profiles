@@ -1,0 +1,165 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "pr-audit-event",
+  "meta": {
+    "source": "https://www.icanbwell.com/fhir_profile_definitions",
+    "security": [
+      {
+        "system": "https://www.icanbwell.com/owner",
+        "code": "bwell"
+      },
+      {
+        "system": "https://www.icanbwell.com/access",
+        "code": "bwell"
+      }
+    ]
+  },
+  "url": "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-audit-event",
+  "version": "1.02",
+  "name": "AuditEvent",
+  "title": "Profile: Audit Event",
+  "status": "active",
+  "experimental": false,
+  "date": "2022-06-02",
+  "publisher": "bWell Connected Health",
+  "description": "Audit Event",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "US",
+          "display": "United States of America"
+        }
+      ],
+      "text": "United States of America"
+    }
+  ],
+  "fhirVersion": "4.0.0",
+  "kind": "resource",
+  "abstract": false,
+  "type": "AuditEvent",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/AuditEvent",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "AuditEvent",
+        "path": "AuditEvent"
+      },
+      {
+        "id": "AuditEvent.id",
+        "path": "AuditEvent.id"
+      },
+      {
+        "id": "AuditEvent.meta",
+        "path": "AuditEvent.meta",
+        "label": "meta",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Meta"
+          }
+        ]
+      },
+      {
+        "id": "AuditEvent.meta.source",
+        "path": "AuditEvent.meta.source",
+        "sliceName": "meta-source",
+        "label": "meta",
+        "short": "uri of the data source",
+        "definition": "Typically the data owner's URL followed by a source/file description",
+        "requirements": "mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of meta.source",
+            "valueUri": "https://www.icanbwell.com/provider-directory"
+          }
+        ]
+      },
+      {
+        "id": "AuditEvent.meta.security",
+        "path": "AuditEvent.meta.security",
+        "sliceName": "meta-security",
+        "label": "meta",
+        "short": "security tags representing the data's owner, vendor, and accessibility",
+        "definition": "data owner: \n \n data vendor: \n \n data access: ",
+        "requirements": "/owner & /access are mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of data owner security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/owner",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data access security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/access",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data vendor security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/vendor",
+              "code": "bwell"
+            }
+          }
+        ]
+      },
+      {
+        "id": "AuditEvent.type",
+        "path": "AuditEvent.type",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "AuditEvent.agent",
+        "path": "AuditEvent.agent",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "AuditEvent.agent.type",
+        "path": "AuditEvent.agent.type",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mustSupport": true
+      }
+    ]
+  }
+}

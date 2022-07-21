@@ -1,0 +1,551 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "pr-employment-observation",
+  "meta": {
+    "source": "https://www.icanbwell.com/fhir_profile_definitions",
+    "security": [
+      {
+        "system": "https://www.icanbwell.com/owner",
+        "code": "bwell"
+      },
+      {
+        "system": "https://www.icanbwell.com/access",
+        "code": "bwell"
+      }
+    ]
+  },
+  "url": "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-employment-observation",
+  "version": "1.02",
+  "name": "EmploymentObservation",
+  "title": "Profile: Employment Observation",
+  "status": "active",
+  "experimental": false,
+  "date": "2022-06-02",
+  "publisher": "bWell Connected Health",
+  "description": "A social-history observation of an employment status",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "US",
+          "display": "United States of America"
+        }
+      ],
+      "text": "United States of America"
+    }
+  ],
+  "keyword": [
+    {
+      "system": "https://www.icanbwell.com/file-category-code",
+      "code": "employee"
+    }
+  ],
+  "fhirVersion": "4.0.0",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Observation",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Observation",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Observation",
+        "path": "Observation"
+      },
+      {
+        "id": "Observation.id",
+        "path": "Observation.id"
+      },
+      {
+        "id": "Observation.meta",
+        "path": "Observation.meta",
+        "label": "meta",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Meta"
+          }
+        ]
+      },
+      {
+        "id": "Observation.meta.source",
+        "path": "Observation.meta.source",
+        "sliceName": "meta-source",
+        "label": "meta",
+        "short": "uri of the data source",
+        "definition": "Typically the data owner's URL followed by a source/file description",
+        "requirements": "mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of meta.source",
+            "valueUri": "https://www.icanbwell.com/provider-directory"
+          }
+        ]
+      },
+      {
+        "id": "Observation.meta.security",
+        "path": "Observation.meta.security",
+        "sliceName": "meta-security",
+        "label": "meta",
+        "short": "security tags representing the data's owner, vendor, and accessibility",
+        "definition": "data owner: \n \n data vendor: \n \n data access: ",
+        "requirements": "/owner & /access are mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of data owner security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/owner",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data access security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/access",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data vendor security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/vendor",
+              "code": "bwell"
+            }
+          }
+        ]
+      },
+      {
+        "id": "de-extension-any",
+        "path": "Observation.extension",
+        "label": "extension-any",
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ]
+      },
+      {
+        "id": "de-extension-any.id",
+        "path": "Observation.extension.id",
+        "label": "extension-any",
+        "short": "defined case-by-case, but is frequently the extension url",
+        "min": 1
+      },
+      {
+        "id": "de-extension-any.extension",
+        "path": "Observation.extension.extension",
+        "label": "extension-any",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "de-extension-any.url",
+        "path": "Observation.extension.url",
+        "label": "extension-any",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "de-extension-any.value[x]",
+        "path": "Observation.extension.value[x]",
+        "label": "extension-any",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "extension-employer-organization",
+        "path": "Observation.extension",
+        "sliceName": "employer-organization",
+        "label": "employer-organization",
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ]
+      },
+      {
+        "id": "extension-employer-organization.id",
+        "path": "Observation.extension.id",
+        "label": "employer-organization",
+        "short": "employer",
+        "min": 1,
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "extension-employer-organization.url",
+        "path": "Observation.extension.url",
+        "label": "employer-organization",
+        "short": "fixed value: http://hl7.org/fhir/us/odh/StructureDefinition/odh-Employer-extension",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "fixedUri": "http://hl7.org/fhir/us/odh/StructureDefinition/odh-Employer-extension"
+      },
+      {
+        "id": "extension-employer-organization.valueReference",
+        "path": "Observation.extension.valueReference",
+        "label": "employer-organization",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-partner-organization"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "de-identifier",
+        "path": "Observation.identifier",
+        "label": "identifier",
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "short": "a value to identify the resource by",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ]
+      },
+      {
+        "id": "identifier.id",
+        "path": "Observation.identifier.id",
+        "label": "identifier",
+        "short": "set case-by-case",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "identifier.use",
+        "path": "Observation.identifier.use",
+        "label": "identifier",
+        "short": "usual | official | temp | secondary | old (If known)",
+        "definition": "The purpose of this identifier.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ]
+      },
+      {
+        "id": "identifier.type",
+        "path": "Observation.identifier.type",
+        "label": "identifier",
+        "short": "Description of identifier",
+        "definition": "A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.",
+        "requirements": "Needs binding valueset",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "identifier.system",
+        "path": "Observation.identifier.system",
+        "label": "identifier",
+        "short": "The system which created the identifier",
+        "definition": "Values may be an oid, uri, url, or canonical",
+        "comment": "for mapped data, this is frequently a canonical url",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "a client's unknown system",
+            "valueUri": "https://www.health.org/person-identifier"
+          }
+        ]
+      },
+      {
+        "id": "identifier.value",
+        "path": "Observation.identifier.value",
+        "label": "identifier",
+        "short": "The unique value",
+        "definition": "The raw identifier value that represents a resource",
+        "requirements": "This should be the raw value, as it exists in the source data (ie without prefix)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "de-employee-id",
+        "path": "Observation.identifier",
+        "sliceName": "identifier-employee-id",
+        "label": "employee-id",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "employment"
+          }
+        ],
+        "short": "employer's's unique identifier for the individual",
+        "requirements": "system = source URI",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "patternIdentifier": {
+          "id": "employee-id",
+          "type": {
+            "coding": [
+              {
+                "id": "employee-id-type",
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "EI"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "de-member-number",
+        "path": "Observation.identifier",
+        "sliceName": "identifier-member-number",
+        "label": "identifier-member-number",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code"
+          }
+        ],
+        "short": "insurance coverage's unique identifier for the individual",
+        "requirements": "system = source URI",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "patternIdentifier": {
+          "id": "member-number",
+          "type": {
+            "coding": [
+              {
+                "id": "member-number-type",
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "MB"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "Observation.status",
+        "path": "Observation.status",
+        "short": "fixed: final",
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.category",
+        "path": "Observation.category",
+        "short": "fixed: social-history",
+        "min": 1,
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+              "code": "social-history"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.code",
+        "path": "Observation.code",
+        "short": "fixed: 74165-2 History of employment status",
+        "definition": "the coded value to indicate this record represents an employment status",
+        "min": 1,
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://loinc.org",
+              "code": "74165-2",
+              "display": "History of employment status"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.subject",
+        "path": "Observation.subject",
+        "short": "Reference to Employee or Beneficiary record",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.focus",
+        "path": "Observation.focus",
+        "min": 0
+      },
+      {
+        "id": "Observation.encounter",
+        "path": "Observation.encounter",
+        "min": 0
+      },
+      {
+        "id": "Observation.effectivePeriod",
+        "path": "Observation.effective[x]",
+        "short": "employment period (hire date / terminiation date)",
+        "type": [
+          {
+            "code": "Period"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.value",
+        "path": "Observation.value",
+        "short": "coded employment status",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://www.hl7.org/fhir/us/bwell/bwell-vs-employment-status"
+        }
+      },
+      {
+        "id": "Observation.dataAbsentReason",
+        "path": "Observation.dataAbsentReason",
+        "min": 0
+      },
+      {
+        "id": "Observation.interpretation",
+        "path": "Observation.interpretation",
+        "min": 0
+      },
+      {
+        "id": "Observation.bodySite",
+        "path": "Observation.bodySite",
+        "min": 0
+      },
+      {
+        "id": "Observation.method",
+        "path": "Observation.method",
+        "min": 0
+      },
+      {
+        "id": "Observation.specimen",
+        "path": "Observation.specimen",
+        "min": 0
+      },
+      {
+        "id": "Observation.device",
+        "path": "Observation.device",
+        "min": 0
+      },
+      {
+        "id": "Observation.referenceRange",
+        "path": "Observation.referenceRange",
+        "min": 0
+      },
+      {
+        "id": "Observation.hasMember",
+        "path": "Observation.hasMember",
+        "min": 0
+      },
+      {
+        "id": "Observation.component",
+        "path": "Observation.component",
+        "short": "other specific details about the employment",
+        "min": 0,
+        "max": "*",
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.component.id",
+        "path": "Observation.component.id",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.component.code",
+        "path": "Observation.component.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Observation.component.value[x]",
+        "path": "Observation.component.value[x]",
+        "min": 1,
+        "mustSupport": true
+      }
+    ]
+  }
+}

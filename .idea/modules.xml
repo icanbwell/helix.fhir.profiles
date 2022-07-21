@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/helix.fhir.profiles.iml" filepath="$PROJECT_DIR$/.idea/helix.fhir.profiles.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../helix.pipelines/.idea/helix.pipelines.iml" filepath="$PROJECT_DIR$/../helix.pipelines/.idea/helix.pipelines.iml" />
+    </modules>
+  </component>
+</project>

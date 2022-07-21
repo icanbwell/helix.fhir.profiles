@@ -1,0 +1,986 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "pr-healthcare-location",
+  "meta": {
+    "source": "https://www.icanbwell.com/fhir_profile_definitions",
+    "security": [
+      {
+        "system": "https://www.icanbwell.com/owner",
+        "code": "bwell"
+      },
+      {
+        "system": "https://www.icanbwell.com/access",
+        "code": "bwell"
+      }
+    ]
+  },
+  "url": "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-healthcare-location",
+  "version": "1.02",
+  "name": "HealthcareLocation",
+  "title": "Profile: Healthcare Location",
+  "status": "active",
+  "experimental": false,
+  "date": "2022-06-02",
+  "publisher": "bWell Connected Health",
+  "description": "Location where healthcare services are rendered",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "US",
+          "display": "United States of America"
+        }
+      ],
+      "text": "United States of America"
+    }
+  ],
+  "keyword": [
+    {
+      "system": "https://www.icanbwell.com/file-category-code",
+      "code": "provider-roster"
+    }
+  ],
+  "fhirVersion": "4.0.0",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Location",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Location",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Location",
+        "path": "Location"
+      },
+      {
+        "id": "Location.id",
+        "path": "Location.id"
+      },
+      {
+        "id": "Location.meta",
+        "path": "Location.meta",
+        "label": "meta",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Meta"
+          }
+        ]
+      },
+      {
+        "id": "Location.meta.source",
+        "path": "Location.meta.source",
+        "sliceName": "meta-source",
+        "label": "meta",
+        "short": "uri of the data source",
+        "definition": "Typically the data owner's URL followed by a source/file description",
+        "requirements": "mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of meta.source",
+            "valueUri": "https://www.icanbwell.com/provider-directory"
+          }
+        ]
+      },
+      {
+        "id": "Location.meta.security",
+        "path": "Location.meta.security",
+        "sliceName": "meta-security",
+        "label": "meta",
+        "short": "security tags representing the data's owner, vendor, and accessibility",
+        "definition": "data owner: \n \n data vendor: \n \n data access: ",
+        "requirements": "/owner & /access are mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of data owner security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/owner",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data access security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/access",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data vendor security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/vendor",
+              "code": "bwell"
+            }
+          }
+        ]
+      },
+      {
+        "id": "de-extension-any",
+        "path": "Location.extension",
+        "label": "extension-any",
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ]
+      },
+      {
+        "id": "de-extension-any.id",
+        "path": "Location.extension.id",
+        "label": "extension-any",
+        "short": "defined case-by-case, but is frequently the extension url",
+        "min": 1
+      },
+      {
+        "id": "de-extension-any.extension",
+        "path": "Location.extension.extension",
+        "label": "extension-any",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "de-extension-any.url",
+        "path": "Location.extension.url",
+        "label": "extension-any",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "de-extension-any.value[x]",
+        "path": "Location.extension.value[x]",
+        "label": "extension-any",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "extension-location-parking",
+        "path": "Location.extension",
+        "sliceName": "location-parking",
+        "label": "location-parking",
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ]
+      },
+      {
+        "id": "extension-location-parking.id",
+        "path": "Location.extension.id",
+        "label": "location-parking",
+        "short": "parking",
+        "min": 1,
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "extension-location-parking.url",
+        "path": "Location.extension.url",
+        "label": "location-parking",
+        "comment": "Needs Review, this value has been set as a client-specific value",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ]
+      },
+      {
+        "id": "extension-location-parking.valueString",
+        "path": "Location.extension.valueString",
+        "label": "location-parking",
+        "short": "string value of the directions",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "extension-location-image",
+        "path": "Location.extension",
+        "sliceName": "location-image",
+        "label": "location-image",
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ]
+      },
+      {
+        "id": "extension-location-image.id",
+        "path": "Location.extension.id",
+        "label": "location-image",
+        "short": "photo",
+        "min": 1,
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "extension-location-image.url",
+        "path": "Location.extension.url",
+        "label": "location-image",
+        "comment": "Needs Review, this value has been set as a client-specific value",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ]
+      },
+      {
+        "id": "extension-location-image.valueString",
+        "path": "Location.extension.valueString",
+        "label": "location-image",
+        "short": "link to photo as a string value",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "de-identifier",
+        "path": "Location.identifier",
+        "label": "identifier",
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "short": "a value to identify the resource by",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ]
+      },
+      {
+        "id": "identifier.id",
+        "path": "Location.identifier.id",
+        "label": "identifier",
+        "short": "set case-by-case",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "identifier.use",
+        "path": "Location.identifier.use",
+        "label": "identifier",
+        "short": "usual | official | temp | secondary | old (If known)",
+        "definition": "The purpose of this identifier.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ]
+      },
+      {
+        "id": "identifier.type",
+        "path": "Location.identifier.type",
+        "label": "identifier",
+        "short": "Description of identifier",
+        "definition": "A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.",
+        "requirements": "Needs binding valueset",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "identifier.system",
+        "path": "Location.identifier.system",
+        "label": "identifier",
+        "short": "The system which created the identifier",
+        "definition": "Values may be an oid, uri, url, or canonical",
+        "comment": "for mapped data, this is frequently a canonical url",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "a client's unknown system",
+            "valueUri": "https://www.health.org/person-identifier"
+          }
+        ]
+      },
+      {
+        "id": "identifier.value",
+        "path": "Location.identifier.value",
+        "label": "identifier",
+        "short": "The unique value",
+        "definition": "The raw identifier value that represents a resource",
+        "requirements": "This should be the raw value, as it exists in the source data (ie without prefix)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "de-npi",
+        "path": "Location.identifier",
+        "sliceName": "npi",
+        "label": "npi",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "NPI of a practitioner or organization",
+        "definition": "national provider identifier as defined by nppes",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "patternIdentifier": {
+          "id": "npi",
+          "use": "official",
+          "type": {
+            "coding": [
+              {
+                "id": "type-npi",
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "NPI"
+              }
+            ]
+          },
+          "system": "http://hl7.org/fhir/sid/us-npi"
+        }
+      },
+      {
+        "id": "de-identifier-facility-id",
+        "path": "Location.identifier",
+        "sliceName": "facility-id",
+        "label": "facility-id",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "external source id for the location",
+        "definition": "raw value used by the data source to identify the record",
+        "requirements": "system = source URI",
+        "alias": [
+          "location identifier",
+          "practice identifier"
+        ],
+        "min": 1,
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "patternIdentifier": {
+          "id": "facility-id",
+          "type": {
+            "coding": [
+              {
+                "id": "facility-id",
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "FI"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "id": "Location.status",
+        "path": "Location.status",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "active | inactive",
+        "definition": "Default to active when missing or unknown",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Location.name",
+        "path": "Location.name",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "name of the facility",
+        "definition": "Name of the location as used by humans. Does not need to be unique.",
+        "comment": "typically the same as the organization name",
+        "alias": [
+          "practice name"
+        ],
+        "min": 1,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Location.alias",
+        "path": "Location.alias",
+        "label": "other_name",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "other names for the location",
+        "definition": "A list of alternate names that the location is known as, or was known as, in the past.",
+        "comment": "If more than one name is relevant, list the alternatives here",
+        "min": 0,
+        "max": "*",
+        "mustSupport": true
+      },
+      {
+        "id": "Location.description",
+        "path": "Location.description",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "description of the location",
+        "definition": "Description of the Location, which helps patients in finding or referencing the place.",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Location.mode",
+        "path": "Location.mode",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "Fixed value 'instance'",
+        "definition": "Indicates the resourcce represents a specific location.",
+        "comment": "If the record is for a physical location, use instance",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "fixedCode": "instance",
+        "mustSupport": true
+      },
+      {
+        "id": "de-location-type",
+        "path": "Location.type",
+        "label": "location-type",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "slicing": {
+          "description": "slice by type",
+          "rules": "open"
+        },
+        "short": "Type of function performed",
+        "definition": "Indicates the type of function performed at the location",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-location-type.type.id",
+        "path": "Location.type.id",
+        "label": "location-type",
+        "short": "set to type code",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "de-location-type.type.coding",
+        "path": "Location.type.coding",
+        "label": "location-type",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "example": [
+          {
+            "label": "foo",
+            "valueCoding": {
+              "id": "bar",
+              "system": "http://terminology.hl7.org/CodeSystem/v3-RoleCode",
+              "code": "laboratory"
+            }
+          }
+        ]
+      },
+      {
+        "id": "de-specialty",
+        "path": "Location.type",
+        "sliceName": "specialty",
+        "label": "specialty",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "short": "location specialty",
+        "comment": "set raw value as code, with code.system representing source URL",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "de-covid-vaccine",
+        "path": "Location.type",
+        "sliceName": "covid-vaccine",
+        "label": "covid-vaccine",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "short": "COVID-19 Vaccine Site",
+        "definition": "Indicates if a location offers COVID-19 vaccines",
+        "comment": "Needs Review",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "de-covid-test",
+        "path": "Location.type",
+        "sliceName": "covid-test",
+        "label": "covid-test",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "short": "COVID-19 Testing Site",
+        "definition": "Indicates if a location offers COVID-19 testing",
+        "comment": "Needs Review",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "de-er-indicator",
+        "path": "Location.type",
+        "sliceName": "er-indicator",
+        "label": "er-indicator",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "integrated-scheduling"
+          }
+        ],
+        "short": "ER indicator",
+        "definition": "Indicates if a location is an Emergency Room",
+        "comment": "Needs Review",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "de-contact-point",
+        "path": "Location.telecom",
+        "label": "contact-point",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "short": "Details of a technology-based contact point",
+        "definition": "phone, fax, etc",
+        "type": [
+          {
+            "code": "ContactPoint"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "contact-point.id",
+        "path": "Location.telecom.id",
+        "label": "contact-point",
+        "short": "set to use and type code(s)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "contact-point.system",
+        "path": "Location.telecom.system",
+        "label": "contact-point",
+        "short": "phone | fax | email | pager | url | sms | other",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ]
+      },
+      {
+        "id": "contact-point.value",
+        "path": "Location.telecom.value",
+        "label": "contact-point",
+        "short": "The value of the contact point",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "contact-point.use",
+        "path": "Location.telecom.use",
+        "label": "contact-point",
+        "short": "home | work | temp | old | mobile - purpose of this contact point",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ]
+      },
+      {
+        "id": "de-business-phone",
+        "path": "Location.telecom",
+        "sliceName": "business-phone",
+        "label": "business-phone",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "Contact phone number for the business",
+        "type": [
+          {
+            "code": "ContactPoint"
+          }
+        ],
+        "patternContactPoint": {
+          "id": "business-phone",
+          "system": "phone",
+          "use": "work"
+        }
+      },
+      {
+        "id": "de-business-fax",
+        "path": "Location.telecom",
+        "sliceName": "business-fax",
+        "label": "business-fax",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "Contact fax number for the business",
+        "type": [
+          {
+            "code": "ContactPoint"
+          }
+        ],
+        "patternContactPoint": {
+          "id": "business-fax",
+          "system": "fax",
+          "use": "work"
+        }
+      },
+      {
+        "id": "de-address-business-address",
+        "path": "Location.address",
+        "sliceName": "business-address",
+        "label": "business-address",
+        "short": "Physical location",
+        "definition": "Physical address of the location",
+        "comment": "Helix pipelines uses a service to standardize these fields",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Address"
+          }
+        ],
+        "example": [
+          {
+            "label": "work address",
+            "valueAddress": {
+              "id": "work-both-current",
+              "use": "work",
+              "type": "both",
+              "line": [
+                "123 Main St",
+                "STE 5"
+              ],
+              "city": "Austin",
+              "state": "TX",
+              "postalCode": "78701"
+            }
+          }
+        ]
+      },
+      {
+        "id": "Location.physicalType",
+        "path": "Location.physicalType",
+        "sliceName": "physicalType",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "Physical form of the location",
+        "definition": "Physical form of the location, e.g. building, room, vehicle, road.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Location.position",
+        "path": "Location.position",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "The absolute geographic location",
+        "definition": "Longitude and latitude values of the physical location",
+        "requirements": "Required to calculate distance for Finding Care",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Location.position.longitude",
+        "path": "Location.position.longitude",
+        "short": "Longitude with WGS84 datum",
+        "min": 1,
+        "type": [
+          {
+            "code": "decimal"
+          }
+        ]
+      },
+      {
+        "id": "Location.position.latitude",
+        "path": "Location.position.latitude",
+        "short": "Latitude with WGS84 datum",
+        "min": 1,
+        "type": [
+          {
+            "code": "decimal"
+          }
+        ]
+      },
+      {
+        "id": "Location.managingOrganization",
+        "path": "Location.managingOrganization",
+        "sliceName": "managingOrganization",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "Healthcare Organization that manages the location / facility",
+        "definition": "The organization responsible for the provisioning and upkeep of the location.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-healthcare-organization"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-hours-of-operation",
+        "path": "Location.hoursOfOperation",
+        "sliceName": "hours-of-operation",
+        "label": "hours-of-operation",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "hours of operation",
+        "definition": "hours of operation",
+        "requirements": "preferred for provider search",
+        "type": [
+          {
+            "code": "BackboneElement"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-hours-of-operation.id",
+        "path": "Location.hoursOfOperation.id",
+        "label": "hours-of-operation",
+        "short": "set to day of week code",
+        "min": 1
+      },
+      {
+        "id": "de-hours-of-operation.daysOfWeek",
+        "path": "Location.hoursOfOperation.daysOfWeek",
+        "label": "hours-of-operation",
+        "short": "mon | tue | wed | thu | fri | sat | sun",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "de-hours-of-operation.allDay",
+        "path": "Location.hoursOfOperation.allDay",
+        "label": "hours-of-operation",
+        "short": "The Location is open all day (boolean)",
+        "definition": "The location is open all day.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ]
+      },
+      {
+        "id": "de-hours-of-operation.openingingTime",
+        "path": "Location.hoursOfOperation.openingTime",
+        "label": "hours-of-operation",
+        "short": "Time that the location opens",
+        "type": [
+          {
+            "code": "time"
+          }
+        ]
+      },
+      {
+        "id": "de-hours-of-operation.closingTime",
+        "path": "Location.hoursOfOperation.closingTime",
+        "label": "hours-of-operation",
+        "short": "Time that the location closes",
+        "type": [
+          {
+            "code": "time"
+          }
+        ]
+      }
+    ]
+  }
+}

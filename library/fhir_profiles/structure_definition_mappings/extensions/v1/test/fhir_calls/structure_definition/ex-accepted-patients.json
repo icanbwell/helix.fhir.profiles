@@ -1,0 +1,285 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "ex-accepted-patients",
+  "meta": {
+    "source": "https://www.icanbwell.com/fhir_profile_definitions",
+    "security": [
+      {
+        "system": "https://www.icanbwell.com/owner",
+        "code": "bwell"
+      },
+      {
+        "system": "https://www.icanbwell.com/access",
+        "code": "bwell"
+      }
+    ]
+  },
+  "url": "https://fhir.icanbwell.com/4_0_0/StructureDefinition/ex-accepted-patients",
+  "version": "1.02",
+  "name": "ExtensionAcceptedPatients",
+  "title": "Profile: Extension - Accepted Patients",
+  "status": "active",
+  "experimental": false,
+  "date": "2022-06-02",
+  "publisher": "bWell Connected Health",
+  "description": "extension for characteristics of patients accepted, including age ranges & new vs existing patients",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "US",
+          "display": "United States of America"
+        }
+      ],
+      "text": "United States of America"
+    }
+  ],
+  "fhirVersion": "4.0.0",
+  "kind": "resource",
+  "abstract": false,
+  "context": [
+    {
+      "type": "element",
+      "expression": "PractitionerRole"
+    },
+    {
+      "type": "element",
+      "expression": "HealthcareService"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension"
+      },
+      {
+        "id": "Extension.id",
+        "path": "Extension.id"
+      },
+      {
+        "id": "Extension.meta",
+        "path": "Extension.meta",
+        "label": "meta",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Meta"
+          }
+        ]
+      },
+      {
+        "id": "Extension.meta.source",
+        "path": "Extension.meta.source",
+        "sliceName": "meta-source",
+        "label": "meta",
+        "short": "uri of the data source",
+        "definition": "Typically the data owner's URL followed by a source/file description",
+        "requirements": "mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of meta.source",
+            "valueUri": "https://www.icanbwell.com/provider-directory"
+          }
+        ]
+      },
+      {
+        "id": "Extension.meta.security",
+        "path": "Extension.meta.security",
+        "sliceName": "meta-security",
+        "label": "meta",
+        "short": "security tags representing the data's owner, vendor, and accessibility",
+        "definition": "data owner: \n \n data vendor: \n \n data access: ",
+        "requirements": "/owner & /access are mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of data owner security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/owner",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data access security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/access",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data vendor security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/vendor",
+              "code": "bwell"
+            }
+          }
+        ]
+      },
+      {
+        "id": "extension-accepted-patients",
+        "path": "Extension.extension",
+        "sliceName": "accepted-patients",
+        "label": "accepted-patients",
+        "short": "Includes: New vs Existing Patient indicator & Patient Age Range(s)",
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ]
+      },
+      {
+        "id": "extension-accepted-patients.id",
+        "path": "Extension.extension.id",
+        "label": "accepted-patients",
+        "short": "accepted-patients",
+        "min": 1,
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "extension-accepted-patients.extension",
+        "path": "Extension.extension.extension",
+        "sliceName": "new-patients",
+        "label": "accepted-patients-new-patients",
+        "short": "an indicator for whether the provider accepts new and/or existing patients",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ]
+      },
+      {
+        "id": "extension-accepted-patients.extension.id",
+        "path": "Extension.extension.extension.id",
+        "label": "accepted-patients-new-patients",
+        "short": "new-patients",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "extension-accepted-patients.extension.url",
+        "path": "Extension.extension.extension.url",
+        "label": "accepted-patients-new-patients",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "fixedUri": "acceptingPatients"
+      },
+      {
+        "id": "extension-accepted-patients.extension.valueCodeableConcept",
+        "path": "Extension.extension.extension.value[x]",
+        "label": "accepted-patients-new-patients",
+        "short": "coded value",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "extension-accepted-patients.extension",
+        "path": "Extension.extension.extension",
+        "sliceName": "age-range",
+        "label": "accepted-patients-age-range",
+        "short": "age range(s) accepted",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Extension"
+          }
+        ]
+      },
+      {
+        "id": "extension-accepted-patients.extension.id",
+        "path": "Extension.extension.extension.id",
+        "label": "accepted-patients-age-range",
+        "short": "age-range or category code",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "extension-accepted-patients.extension.url",
+        "path": "Extension.extension.extension.url",
+        "label": "accepted-patients-age-range",
+        "short": "fixed value: ageRange",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "fixedUri": "ageRange"
+      },
+      {
+        "id": "extension-accepted-patients.extension.valueRange",
+        "path": "Extension.extension.extension.value[x]",
+        "label": "accepted-patients-age-range",
+        "short": "age range in unit = years",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Range"
+          }
+        ]
+      },
+      {
+        "id": "extension-accepted-patients.url",
+        "path": "Extension.extension.url",
+        "label": "accepted-patients",
+        "short": "fixed value: http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatients",
+        "definition": "this spec is based upon Da-Vinci's extension for new patients",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "fixedUri": "http://hl7.org/fhir/us/davinci-pdex-plan-net/StructureDefinition/newpatients"
+      }
+    ]
+  }
+}

@@ -1,0 +1,760 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "pr-healthcare-organization",
+  "meta": {
+    "source": "https://www.icanbwell.com/fhir_profile_definitions",
+    "security": [
+      {
+        "system": "https://www.icanbwell.com/owner",
+        "code": "bwell"
+      },
+      {
+        "system": "https://www.icanbwell.com/access",
+        "code": "bwell"
+      }
+    ]
+  },
+  "url": "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-healthcare-organization",
+  "version": "1.02",
+  "name": "HealthcareOrganization",
+  "title": "Profile: Healthcare Organization",
+  "status": "active",
+  "experimental": false,
+  "date": "2022-06-02",
+  "publisher": "bWell Connected Health",
+  "description": "Healthcare organizations including practices, claims billing organizations, and pharmacies.",
+  "jurisdiction": [
+    {
+      "coding": [
+        {
+          "system": "urn:iso:std:iso:3166",
+          "code": "US",
+          "display": "United States of America"
+        }
+      ],
+      "text": "United States of America"
+    }
+  ],
+  "keyword": [
+    {
+      "system": "https://www.icanbwell.com/file-category-code",
+      "code": "provider-roster"
+    },
+    {
+      "system": "https://www.icanbwell.com/file-category-code",
+      "code": "rx-claims"
+    },
+    {
+      "system": "https://www.icanbwell.com/file-category-code",
+      "code": "med-claims"
+    }
+  ],
+  "fhirVersion": "4.0.0",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Organization",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Organization",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Organization",
+        "path": "Organization"
+      },
+      {
+        "id": "Organization.id",
+        "path": "Organization.id"
+      },
+      {
+        "id": "Organization.meta",
+        "path": "Organization.meta",
+        "label": "meta",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Meta"
+          }
+        ]
+      },
+      {
+        "id": "Organization.meta.source",
+        "path": "Organization.meta.source",
+        "sliceName": "meta-source",
+        "label": "meta",
+        "short": "uri of the data source",
+        "definition": "Typically the data owner's URL followed by a source/file description",
+        "requirements": "mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of meta.source",
+            "valueUri": "https://www.icanbwell.com/provider-directory"
+          }
+        ]
+      },
+      {
+        "id": "Organization.meta.security",
+        "path": "Organization.meta.security",
+        "sliceName": "meta-security",
+        "label": "meta",
+        "short": "security tags representing the data's owner, vendor, and accessibility",
+        "definition": "data owner: \n \n data vendor: \n \n data access: ",
+        "requirements": "/owner & /access are mandatory for all resources in bWell's FHIR Server",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "example": [
+          {
+            "label": "example of data owner security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/owner",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data access security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/access",
+              "code": "bwell"
+            }
+          },
+          {
+            "label": "example of data vendor security tag",
+            "valueCoding": {
+              "system": "https://www.icanbwell.com/vendor",
+              "code": "bwell"
+            }
+          }
+        ]
+      },
+      {
+        "id": "de-identifier",
+        "path": "Organization.identifier",
+        "label": "identifier",
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "short": "a value to identify the resource by",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ]
+      },
+      {
+        "id": "identifier.id",
+        "path": "Organization.identifier.id",
+        "label": "identifier",
+        "short": "set case-by-case",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "identifier.use",
+        "path": "Organization.identifier.use",
+        "label": "identifier",
+        "short": "usual | official | temp | secondary | old (If known)",
+        "definition": "The purpose of this identifier.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ]
+      },
+      {
+        "id": "identifier.type",
+        "path": "Organization.identifier.type",
+        "label": "identifier",
+        "short": "Description of identifier",
+        "definition": "A coded type for the identifier that can be used to determine which identifier to use for a specific purpose.",
+        "requirements": "Needs binding valueset",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "identifier.system",
+        "path": "Organization.identifier.system",
+        "label": "identifier",
+        "short": "The system which created the identifier",
+        "definition": "Values may be an oid, uri, url, or canonical",
+        "comment": "for mapped data, this is frequently a canonical url",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ],
+        "example": [
+          {
+            "label": "a client's unknown system",
+            "valueUri": "https://www.health.org/person-identifier"
+          }
+        ]
+      },
+      {
+        "id": "identifier.value",
+        "path": "Organization.identifier.value",
+        "label": "identifier",
+        "short": "The unique value",
+        "definition": "The raw identifier value that represents a resource",
+        "requirements": "This should be the raw value, as it exists in the source data (ie without prefix)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "de-npi",
+        "path": "Organization.identifier",
+        "sliceName": "npi",
+        "label": "npi",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "NPI of a practitioner or organization",
+        "definition": "national provider identifier as defined by nppes",
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "patternIdentifier": {
+          "id": "npi",
+          "use": "official",
+          "type": {
+            "coding": [
+              {
+                "id": "type-npi",
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "NPI"
+              }
+            ]
+          },
+          "system": "http://hl7.org/fhir/sid/us-npi"
+        }
+      },
+      {
+        "id": "de-tax-id",
+        "path": "Organization.identifier",
+        "sliceName": "tax-id",
+        "label": "tax-id",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code"
+          }
+        ],
+        "short": "Tax ID of a practitioner or organization",
+        "definition": "Tax ID as defined by nppes",
+        "alias": [
+          "tax identification number",
+          "TIN"
+        ],
+        "min": 0,
+        "type": [
+          {
+            "code": "Identifier"
+          }
+        ],
+        "patternIdentifier": {
+          "id": "tin",
+          "use": "official",
+          "type": {
+            "coding": [
+              {
+                "id": "type-tin",
+                "system": "http://terminology.hl7.org/CodeSystem/v2-0203",
+                "code": "TAX"
+              }
+            ]
+          },
+          "system": "http://hl7.org/fhir/sid/us-tin"
+        }
+      },
+      {
+        "id": "Organization.active",
+        "path": "Organization.active",
+        "min": 1,
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-organization-type",
+        "path": "Organization.type",
+        "label": "organization-type",
+        "slicing": {
+          "description": "slice by type",
+          "rules": "open"
+        },
+        "short": "Type of organization",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-organization-type.type.id",
+        "path": "Organization.type.id",
+        "label": "organization-type",
+        "short": "set to type code",
+        "requirements": "Needs Review",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "de-organization-type.type.coding",
+        "path": "Organization.type.coding",
+        "label": "organization-type",
+        "min": 1,
+        "max": "*",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ]
+      },
+      {
+        "id": "de-healthcare-type",
+        "path": "Organization.type",
+        "sliceName": "healthcare-type",
+        "label": "healthcare-type",
+        "short": "prov | pharm | other",
+        "definition": "A healthcare organization such as practices, pharmacies, etc.",
+        "requirements": "prov for healthcare practices \n \n pharm for pharmacies \n \n other + prov for parent organizations",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/organization-type"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Organization.name",
+        "path": "Organization.name",
+        "label": "organization-name",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "Name of the organization",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "de-contact-point",
+        "path": "Organization.telecom",
+        "label": "contact-point",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "short": "Details of a technology-based contact point",
+        "definition": "phone, fax, etc",
+        "type": [
+          {
+            "code": "ContactPoint"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "contact-point.id",
+        "path": "Organization.telecom.id",
+        "label": "contact-point",
+        "short": "set to use and type code(s)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "contact-point.system",
+        "path": "Organization.telecom.system",
+        "label": "contact-point",
+        "short": "phone | fax | email | pager | url | sms | other",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ]
+      },
+      {
+        "id": "contact-point.value",
+        "path": "Organization.telecom.value",
+        "label": "contact-point",
+        "short": "The value of the contact point",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "contact-point.use",
+        "path": "Organization.telecom.use",
+        "label": "contact-point",
+        "short": "home | work | temp | old | mobile - purpose of this contact point",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ]
+      },
+      {
+        "id": "de-business-phone",
+        "path": "Organization.telecom",
+        "sliceName": "business-phone",
+        "label": "business-phone",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "Contact phone number for the business",
+        "type": [
+          {
+            "code": "ContactPoint"
+          }
+        ],
+        "patternContactPoint": {
+          "id": "business-phone",
+          "system": "phone",
+          "use": "work"
+        }
+      },
+      {
+        "id": "de-business-fax",
+        "path": "Organization.telecom",
+        "sliceName": "business-fax",
+        "label": "business-fax",
+        "code": [
+          {
+            "system": "https://www.icanbwell.com/product-feature-code",
+            "code": "provider-search"
+          }
+        ],
+        "short": "Contact fax number for the business",
+        "type": [
+          {
+            "code": "ContactPoint"
+          }
+        ],
+        "patternContactPoint": {
+          "id": "business-fax",
+          "system": "fax",
+          "use": "work"
+        }
+      },
+      {
+        "id": "de-address",
+        "path": "Organization.address",
+        "label": "address",
+        "slicing": {
+          "description": "slice by types",
+          "rules": "open"
+        },
+        "short": "An address expressed using postal conventions",
+        "definition": "A physical or postal address",
+        "type": [
+          {
+            "code": "Address"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-id",
+        "path": "Organization.address.id",
+        "label": "address",
+        "short": "pattern: use - type - 'current'/period-end in MMDDYYYY format",
+        "definition": "A unique identifier for the element within a given resource",
+        "comment": "incoming addresses are presumed current unless otherwise specified",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "example": [
+          {
+            "label": "id example of a current address",
+            "valueString": "home-both-current"
+          },
+          {
+            "label": "id example of a previous address",
+            "valueString": "home-old-2022"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-use",
+        "path": "Organization.address.use",
+        "label": "address",
+        "short": "home | work | temp | billing",
+        "definition": "The purpose of the address",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-type",
+        "path": "Organization.address.type",
+        "label": "address",
+        "short": "postal | physical | both (presumed both if absent)",
+        "definition": "The type of an address (physical/postal)",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-text",
+        "path": "Organization.address.text",
+        "label": "address",
+        "short": "Text representation of the address",
+        "definition": "Specifies the entire address as it should be displayed e.g. on a postal label",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-line",
+        "path": "Organization.address.line",
+        "label": "address",
+        "short": "Street name, number, direction & P.O. Box etc",
+        "comment": "addresses are subjected to a standardization process that may alter these values",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-city",
+        "path": "Organization.address.city",
+        "label": "address",
+        "short": "City name",
+        "comment": "addresses are subjected to a standardization process that may alter these values",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-district",
+        "path": "Organization.address.district",
+        "label": "address",
+        "short": "District name (aka county)",
+        "comment": "addresses are subjected to a standardization process that may alter these values",
+        "alias": [
+          "county"
+        ],
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-state",
+        "path": "Organization.address.state",
+        "label": "address",
+        "short": "two-digit state code preferred",
+        "comment": "addresses are subjected to a standardization process that may alter these values",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-postalCode",
+        "path": "Organization.address.postalCode",
+        "label": "address",
+        "short": "zip code",
+        "comment": "addresses are subjected to a standardization process that may alter these values",
+        "requirements": "no current structure preference",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "de-address-country",
+        "path": "Organization.address.country",
+        "label": "address",
+        "comment": "addresses are subjected to a standardization process that may alter these values",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "de-address-period",
+        "path": "Organization.address.period",
+        "label": "address",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Period"
+          }
+        ]
+      },
+      {
+        "id": "de-address-business-address",
+        "path": "Organization.address",
+        "sliceName": "business-address",
+        "label": "business-address",
+        "short": "Physical location",
+        "definition": "Physical address of the location",
+        "comment": "Helix pipelines uses a service to standardize these fields",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Address"
+          }
+        ],
+        "example": [
+          {
+            "label": "work address",
+            "valueAddress": {
+              "id": "work-both-current",
+              "use": "work",
+              "type": "both",
+              "line": [
+                "123 Main St",
+                "STE 5"
+              ],
+              "city": "Austin",
+              "state": "TX",
+              "postalCode": "78701"
+            }
+          }
+        ]
+      },
+      {
+        "id": "Organization.partOf",
+        "path": "Organization.partOf",
+        "label": "parent-organization",
+        "short": "The parent organization",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.icanbwell.com/4_0_0/StructureDefinition/pr-healthcare-organization"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
