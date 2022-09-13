@@ -1,0 +1,13 @@
+version: '3.5'
+services:
+  dev:
+    user: root
+    build:
+      dockerfile: spark.Dockerfile
+      context: .
+    image: helix_fhir_profiles_dev
+    volumes:
+      - ./:/helix_fhir_profiles/
+      - ~/.local/share/virtualenvs:/.local/share/virtualenvs:rw
+    container_name: helix_fhir_profiles_dev
+    working_dir: /helix.fhir.profiles
