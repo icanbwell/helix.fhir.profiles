@@ -1,6 +1,7 @@
 # noinspection Mypy
 from typing import Any
 
+# noinspection Mypy
 from setuptools import setup, find_packages
 from os import path, getcwd
 
@@ -48,7 +49,7 @@ fix_setuptools()
 setup(
     name=package_name,
     version=version,
-    author="Abbey",
+    author="Abbey McCulloch",
     author_email="abbey.mcculloch@icanbwell.com",
     description="helix_fhir_profiles",
     long_description=long_description,

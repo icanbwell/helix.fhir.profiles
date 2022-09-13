@@ -4,7 +4,7 @@ services:
     user: root
     build:
       dockerfile: Dockerfile
-      context: .
+      context: ""
     volumes:
       - ./:/src/
     container_name: helix_fhir_profiles_dev
