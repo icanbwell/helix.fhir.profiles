@@ -4,6 +4,5 @@
     <content url="file://$MODULE_DIR$" />
     <orderEntry type="jdk" jdkName="Remote Python 3.7.14 Docker Compose (dev at [/Users/abbeymcculloch/Projects/helix.fhir.profiles/docker-compose.yml])" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="helix.pipelines" />
   </component>
 </module>

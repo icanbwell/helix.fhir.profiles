@@ -65,4 +65,4 @@ helix-mockserver-client=">=0.1.3"
 python_version = "3.7"
 
 [pipenv]
-allow_prereleases = false
+allow_prereleases = true

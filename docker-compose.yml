@@ -3,11 +3,11 @@ services:
   dev:
     user: root
     build:
-      dockerfile: Dockerfile
-      context: ""
+      dockerfile: spark.Dockerfile
+      context: .
+    image: helix_fhir_profiles_dev
     volumes:
-      - ./:/src/
+      - ./:/helix_fhir_profiles/
+      - ~/.local/share/virtualenvs:/.local/share/virtualenvs:rw
     container_name: helix_fhir_profiles_dev
-    working_dir: /src
-    env_file:
-      - docker.env
+    working_dir: /helix.fhir.profiles
