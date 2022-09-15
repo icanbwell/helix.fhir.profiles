@@ -5,13 +5,16 @@ USER root
 ENV PYTHONPATH=/helix.fhir.profiles
 ENV CLASSPATH=/helix_fhir_profiles/jars:$CLASSPATH
 
+# remove the older version of entrypoints with apt-get because that is how it was installed
+RUN apt-get remove python3-entrypoints -y
+
 COPY Pipfile* /helix.fhir.profiles/
 WORKDIR /helix.fhir.profiles
 
 RUN df -h # for space monitoring
-#RUN pipenv sync --dev --system
-RUN python3 -m pip install --upgrade pip && python -m pip install --no-cache-dir pipenv
-RUN pipenv lock && pipenv sync --dev --system && pipenv-setup sync --pipfile
+RUN pipenv sync --dev --system
+#RUN python3 -m pip install --upgrade pip && python -m pip install --no-cache-dir pipenv
+#RUN pipenv lock && pipenv sync --dev --system && pipenv-setup sync --pipfile
 
 
 # COPY ./jars/* /opt/bitnami/spark/jars/
