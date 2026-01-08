@@ -1,4 +1,4 @@
-FROM imranq2/helix.spark:3.3.0.8
+FROM imranq2/helix.spark:3.5.1.9-slim
 # https://github.com/icanbwell/helix.spark
 USER root
 
